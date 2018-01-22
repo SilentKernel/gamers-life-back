@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+{% block order_view %} Premières {% endblock %}
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li class="active">Premières</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    {% if posts is empty %}
+        <div class="well text-center">
+            Encore aucune #GL !
+        </div>
+    {% else %}
+        {% include 'QuoteCMSPostBundle:List:List.html.twig' with {'posts' : posts, 'notShowFirst' : false } %}
+    {% endif %}
+{% endblock %}
+
+{% block title %}{{ parent() }} Premières #GL{% endblock %}
+{% block description %}Les premères #GL postés sur le site{% endblock %}
+{% block keywords %}{{ parent() }}, premières{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class = "panel panel-default">
+        <div class = "panel-heading">
+            GL Validation
+        </div>
+        <div class = "panel-body">
+            {{ form_start(form, {'attr' : {'class' : 'form-horizontal', "id" : "validationPostForm"}, 'action' : path('quote_cms_moderator_post',{'postId':post.id}) } ) }}
+
+            <div class = "form-group">
+                {{ form_label(form.title,"Titre : ", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.title, {"attr" : { "class" : "form-control", "autocomplete" : "off"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group  {% if post.tempGameName != null %} hidden {% endif %}">
+                {{ form_label(form.validated,"Valider la #GL : ", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.validated, {"attr" : { "class" : "form-control", "autocomplete" : "off"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group">
+                {{ form_label(form.game,"Jeu :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8 ">
+                    {{ form_widget(form.game, {"attr" : { "class" : "form-control"}}) }}
+                </div>
+            </div>
+
+
+            <div class = "form-group  {% if post.tempGameName ==null %} hidden {% endif %}">
+                {{ form_label(form.tempGameName,"Jeu (entrée directe) : ", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.tempGameName, {"attr" : { "class" : "form-control", "autocomplete" : "off"}}) }}
+                </div>
+                <div class="spacer-sm col-lg-12"></div>
+                <div class = "col-lg-8 col-lg-offset-3">
+                    <div class="alert alert-info text-center" role="alert">
+                        Vous devez ajoutter ce jeu à la liste des jeux pour pouvoir publier cette GL
+                        <br>
+                        <a href="{{ path('quote_cms_game_new') }}" class="btn btn-default">Ajoutter ce jeu</a>
+                        <p>Une fois le jeu ajouté, supprimez ce champs et séléctionnez le dans la liste précédante </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "form-group">
+                {{ form_label(form.story,"Histoire :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.story, {"attr" : { "class" : "form-control", 'rows' : "10"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group {% if post.pictures is empty %} hidden {% endif %}">
+                {{ form_label(form.videoUrl,"Capture(s) d'écran(s) :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+
+                        {% for picture in post.pictures %}
+                                <a href = "#" data-toggle="tooltip" data-placement="top" class="{% if loop.index > 3 %}hidden-xs{% endif %} a-clear" title="Voir la capture d'écran {{ loop.index }} de cette Gamer's Life"  onclick='return showPostPicture("{{ post.slug }}", {{ loop.index }});'>
+                                    <img class = "img-rounded img-link" src = "{{ picture | imagine_filter('screenshot_thumb') }}" alt="Capture d'écran de {{ post.title }}">
+                                </a>
+                        {% endfor %}
+
+                </div>
+            </div>
+
+
+            <div class = "form-group {% if not post.videoUrl %} hidden {% endif %}">
+                {{ form_label(form.videoUrl,"Lien vidéo :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                {% if post.videoUrl != null %}
+                    <div class = "col-lg-8">
+
+                        <a href="#" onclick="return showPostVideo({{ post.id }})" data-toggle="tooltip" data-placement="top" title="Regarder la vidéo de cette #GL" class = "a-clear">
+                            <div class="img-link video-btn lead">
+                                <i class="fa fa-youtube-play"></i>
+                            </div>
+                        </a>
+
+                    </div>
+                {% endif %}
+                <div class = "col-lg-8 {% if post.videoUrl != null %}col-lg-offset-3{% endif %}">
+                    {{ form_widget(form.videoUrl, {"attr" : { "class" : "form-control"}}) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div class = "form-group">
+                <div class="col-lg-8 col-lg-offset-3">
+                    <input class = "btn btn-default" type="submit" id="_submit" name="_submit" value="Enregistrer" />
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    {% include 'QuoteCMSPostBundle:Single:singlePart.html.twig'  with {'inList': null,'postSlug': '--'} %}
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var gameAutoCompletion = null;
+        initGamePostAE();
+    </script>
+{% endblock %}
+
+{% block title %}{{ parent() }} Post Validation{% endblock %}

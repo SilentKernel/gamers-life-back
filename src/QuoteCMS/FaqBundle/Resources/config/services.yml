@@ -1,0 +1,4 @@
+services:
+#    quote_cms_faq.example:
+#        class: QuoteCMS\FaqBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

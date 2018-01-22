@@ -1,0 +1,5 @@
+silentkernel_se_auto_complete:
+    path:     /autocomplete/se/{keywords}.json
+    defaults: { _controller: SilentkernelSEAutoCompleteBundle:JSON:getGoogleResponse }
+    options:
+       expose: true

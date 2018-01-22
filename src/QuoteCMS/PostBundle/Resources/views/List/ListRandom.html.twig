@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block order_view %} Aléatoire {% endblock %}
+
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li class="active">Aléatoire</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    {% if posts is empty %}
+        <div class="well text-center">
+            Encore aucune #GL !
+        </div>
+    {% else %}
+      {% for post in posts %}
+              {% include 'QuoteCMSPostBundle:Single:singlePart.html.twig' with {'post' : post, 'inList' : true} %}
+      {% endfor %}
+      <div class="well well-sm text-center">
+        <a href="{{ path('quote_cms_post_random') }}" class="btn btn-default">Afficher d'autre #GL aléatoires !</a>
+      </div>
+    {% endif %}
+{% endblock %}
+
+{% block title %}{{ parent() }} Aléatoire{% endblock %}
+{% block description %}#GL aléatoire{% endblock %}
+{% block keywords %}{{ parent() }}, aléatoire{% endblock %}

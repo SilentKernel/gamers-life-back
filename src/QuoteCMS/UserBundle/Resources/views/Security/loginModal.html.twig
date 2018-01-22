@@ -1,0 +1,62 @@
+<div class="modal fade" id = "loginModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Connexion</h4>
+            </div>
+            <div class="modal-body">
+				<div class="row">
+					<div class="col-md-12 col-lg-12" id = "loginModalMessage"></div>
+					<div class="col-md-8 col-lg-8">
+		            <form id="form_login_modal" action="{{ path("fos_user_security_check") }}" method="post" class="form-horizontal" >
+		                <input type="hidden" id="login_csrf_modal" name="_csrf_token" value="{{ csrf_token }}" />
+
+		                <div class="form-group">
+
+		                    <label class="col-md-4 col-lg-4 control-label" for="username_modal">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+		                    <div class="col-md-8 col-lg-8">
+		                        <input class="form-control" type="text" id="username_modal" name="_username" value="{{ last_username }}" required="required" />
+		                    </div>
+		                </div>
+
+		                <div class="form-group">
+		                    <label class="col-md-4 col-lg-4 control-label" for="password_modal">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+		                    <div class = "col-md-8 col-lg-8">
+		                        <input class="form-control" type="password" id="password_modal" name="_password" required="required" />
+                                <a href="{{ path("fos_user_resetting_request") }}" onclick="return closeLoginShowReset();">Mot de passe oublié ?</a>
+                                <div class="checkbox">
+		                            <label>
+		                                <input type="checkbox" id="remember_me_modal" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+		                            </label>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class = "form-group">
+		                    <div class="col-md-9 col-lg-9 col-md-offset-4 col-lg-offset-4">
+								<button type="submit" id="submit_login_modal" class="btn btn-default">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                <button id="close_login_shown_register_modal" onclick="return closeLoginShowRegister();" class="btn btn-primary">S'inscrire</button>
+								<button id="cancel_login_modal" type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                            </div>
+		                </div>
+		            </form>
+					</div>
+					<div class="col-md-4 col-lg-4">
+  					  <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-facebook" HREF="{{url('hwi_oauth_service_redirect',{service: "facebook"})}}">
+    					  	<i class="fa fa-facebook"></i> Connexion avec Facebook
+ 					  </a>
+  					  <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-google-plus" HREF="{{url('hwi_oauth_service_redirect',{service: "google"})}}">
+    					  	<i class="fa fa-google-plus"></i> Connexion avec Google
+ 					  </a>
+            <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-microsoft" HREF="{{url('hwi_oauth_service_redirect',{service: "microsoft"})}}">
+                <i class="fa fa-windows"></i> Connexion avec Microsoft
+          </a>
+          <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-twitch" HREF="{{url('hwi_oauth_service_redirect',{service: "twitch"})}}">
+              <i class="fa fa-twitch"></i> Connexion avec Twitch
+        </a>
+					</div>
+				</div>
+		    </div>
+           </div>
+		</div>
+    </div>

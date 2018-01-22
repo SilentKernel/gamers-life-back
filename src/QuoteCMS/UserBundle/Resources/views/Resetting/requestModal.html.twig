@@ -1,0 +1,33 @@
+<div class="modal fade" id = "resetModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Mot de passe oublié</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12" id = "resetModalMessage"></div>
+                    <div class="col-md-12 col-lg-12">
+                        <form id="form_reset_modal" action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="col-md-4 col-lg-4 control-label" for="username_reset_modal">Nom d'utilisateur ou adresse e-mail : </label>
+                                <div class="col-md-8 col-lg-8">
+                                    <input class="form-control" type="text" id="username_reset_modal" name="username" required="required" />
+                                </div>
+                            </div>
+
+                            <div class = "form-group">
+                                <div class="col-md-10 col-lg-10 col-md-offset-4 col-lg-offset-4">
+                                    <input type="submit" id="submit_reset_modal" class="btn btn-default" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+                                    <button id="cancel_reset_modal" type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

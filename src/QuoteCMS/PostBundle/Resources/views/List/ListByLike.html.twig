@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+{% block order_view %} Top {% endblock %}
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li class="active">Les mieux notées</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    {% if posts is empty %}
+        <div class="well text-center">
+            Encore aucune #GL !
+        </div>
+    {% else %}
+        {% include 'QuoteCMSPostBundle:List:List.html.twig' with {'posts' : posts, 'notShowFirst' : false } %}
+    {% endif %}
+{% endblock %}
+
+{% block title %}{{ parent() }} Les mieux notées{% endblock %}
+{% block description %}Liste des #GL les mieux notés{% endblock %}
+{% block keywords %}{{ parent() }}, cool, les mieux notés{% endblock %}

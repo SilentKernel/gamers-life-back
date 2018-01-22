@@ -1,0 +1,160 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }} Foire aux questions{% endblock %}
+{% block description %}Foire aux question de Gamer's Life{% endblock %}
+{% block keywords %}{{ parent() }}, foire aux questions, FAQ{% endblock %}
+
+{% block container %}
+<div class = "panel panel-default">
+  <div class = "panel-heading">
+    <div class = "row">
+      <div class = "col-lg-12">
+        <div class = "pull-left">
+          <h3 class="panel-title"><b> Foire aux questions </b></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "panel-body">
+    <div class = "row">
+      <div class = "col-lg-12">
+        <div class = "pull-left">
+          <h4>Qu’est ce que Gamers-life.fr ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Gamer’s Life est l'exutoire des joueurs de jeux vidéos. Comprenez comme suit. Qui n’a jamais joué à un jeu vidéo ? Que ce soit Candy Crush, Counter Strike ou... le Démineur ? Et au cours de vos parties, à qui n’est-il jamais arrivé quelque chose d’extrêmement frustrant, ou au contraire de très joyeux ?
+              Et à ce moment, cet instant précis où vous gagnez, perdez… Ne ressentez vous pas… CETTE ENVIE DE TOUT CASSER OU DE SAUTER AU PLAFOND ?!
+              Vous voyez ? C’est pour ça que Gamer’s Life existe. Maintenant, quand il vous arrivera une mésaventure, un gros coup de bol, où une rencontre du troisième type sur un jeu vidéo, plutôt que de rester seul, vous pourrez venir le partager avec nous !
+              Attrapez votre clavier et en quelques mots, racontez votre histoire. Le truc en plus ? Ajoutez une capture d’écran, une photo ou une vidéo ! Les gens adooooorent les images.
+            </p>
+          </blockquote>
+
+          <h4>Comment est né le site ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              L’idée a germé par un beau jour du printemps 2015 dans la tête du fondateur, SilentDev.
+              Lui même passionné de technologies et joueur de jeu vidéo assidu, il a connu comme nous tout un tas de mésaventures en ligne, de moments joyeux comme désespérants. Bref, ce genre de petites histoires qui fait du bien à partager, et rire le lecteur. C’est ainsi que Gamer’s Life est sorti de terre, promettant d’être le rendez-vous incontournable des gamers.
+              Développeur talentueux et infatigable, SilentDev travaille depuis ce jour à créer et améliorer son site jusqu’à la version que vous avez là, sous vos mirettes ébahies.
+              Très vite emballée par l’idée, l’équipe s’est agrandie avec plusieurs collaborateurs passionnés qui enrichissent le site Web de leurs idées farfelues et travaillent à son développement, dont Madangel, Développeur/Générateur de noms et Prudence, Rédactrice/Community Manager.
+            </p>
+          </blockquote>
+          <h4>Quelles sont vos ambitions ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Gamers-life.fr n’est pas simplement un site amusant, piquant et parfois déconcertant.
+              Notre équipe est composée de personnes jeunes, dans l’air du temps et profondément marquées par les actualités du monde de l’internet. Nous souhaitons aller plus loin qu’un simple site Web en exploitant toutes les ressources possibles pour innover en confort de navigation, mais surtout en sécurité et respect de la vie personnelle de nos utilisateurs.
+              Ce genre de choix nous oblige a beaucoup plus de travail, mais le résultat est là. Notre site Web est fiable, et cela nous rempli de fierté.
+              Notre ambition première est de toujours maintenir ce niveau d’exigence, et gagner la confiance de nos utilisateurs en sera la meilleure récompense.
+            </p>
+          </blockquote>
+
+          <h4>Qui peut poster une GL ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Tout le monde ! Gamer’s Life veut transcender et fédérer le milieu du jeu vidéo.
+              Quelle différence pour nous entre un jeune homme, le casque vissé sur les oreilles, qui vient de perdre un match serré sur League of Legends et le cadre assis dans le métro qui vient de battre son record sur Papy Jump ? Aucun ! Tous deux ont connu une mésaventure ou une joie que nous serions ravis de partager avec vous. Et s’il y a une capture d’image, c’est encore mieux !
+              Bref, nous accueillons tout le monde à bras ouverts.
+            </p>
+          </blockquote>
+
+          <h4>Comment poster une #GL ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              La marche à suivre est toute simple. Rendez-vous dans Proposer votre #GL. Sélectionnez le jeu concerné dans le premier menu déroulant appelé “Jeu”. S’il ne s’y trouve pas, cela ne fait rien ! Écrivez simplement son nom en dessous dans l’encadré “Jeu (entrée directe”). Puis, raconter votre histoire. Il est inutile de préciser que nous publions les histoires claires, drôles, émouvantes, originales, mais surtout écrites proprement !
+              Si vous disposez d’une capture d’écran ou d’une image pouvant illustrer ce qu’il vous est arrivé, insérez-la en cliquant sur “Insérer une ou plusieurs capture d’écran”. Une fenêtre s’affiche. Cliquez dessus pour accéder à la recherche de documents ou faites glisser directement de votre dossier à la fenêtre. Il est possible de charger plusieurs images en même temps. La limite d’une image est de 2 mo. Une fois chargée, cliquez sur “Fermer”.
+              Enfin, vous pouvez ajouter une vidéo pour illustrer votre #GL. Pour cela, entrez simplement le lien de votre vidéo dans l’encadré “Lien vidéo”.
+              Nous rappelons que les images postées ne doivent pas servir à des fins commerciales, de publicité, et autre dérivation de l’idée première qu’est le divertissement sur GL.fr. En outre, vous devez posséder les droits d’auteur de l’image et/ou vidéo utilisée.
+
+              Pour plus d’informations, nous vous invitons à jeter un coup d’oeil sur le <a href="{{ path('quote_cms_faq_reglement') }}">Règlement de notre communauté</a>.
+              Vous pouvez poster anonymement votre #GL, même en ayant un compte !
+            </p>
+          </blockquote>
+          <h4>Qui modère ma #GL ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Une fois postée, votre histoire est envoyée à l’équipe de gamers-life.fr. Si elle plaît, nous lui donnons un titre pour lui rendre hommage. Enfin, elle sera mise en ligne sur notre site. (Bien sûr, nous corrigerons les éventuelles fautes d’orthographe.)
+              N’ayez crainte, nous lisons attentivement tout ce que nous recevons.
+            </p>
+          </blockquote>
+          <h4>Pourquoi ma #GL n’a pas été publiée ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Pour être acceptée, une #GL doit provoquer une émotion à la lecture. Rire, compassion, admiration. “Je suis allé sur mon compte Wildstar, et j’ai crée un humain guerrier. Cela m’a pris beaucoup de temps.”. Avouez que ce n’est pas terrible.
+              De même, nous publierons les GL dont l’orthographe aura été soigné. Le langage SMS fait pleurer nos petits yeux.
+              Pas de panique ! Si votre histoire est géniale mais que vous avez laissé passer une faute, nous la corrigerons avant publication.
+              Enfin, si vous ajoutez une image, celle-ci doit vous appartenir. Joindre un logo de votre jeu vidéo par exemple n’a aucun intérêt. Nous ne prenons que les captures d’écran ou photos de vos jeux, accessoires, animaux, vous même etc…
+            </p>
+          </blockquote>
+          <h4>Comment créer son compte ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Rendez-vous dans la rubrique “S’inscrire” en haut à droite du site Gamers-life.fr. Vous avez la possibilité de vous connecter directement grâce à votre Facebook, Twitter ou Google+.
+              Sinon, remplissez tout simplement les champs suivants: Nom d’utilisateur (votre pseudo en d’autres termes), adresse mail et mot de passe. Vous n’avez pas besoin de confirmer votre création de compte via votre boite mail, et pouvez naviguer et poster immédiatement.
+              Nous travaillons encore et toujours à développer plus de fonctionnalités pour améliorer votre confort et l’intégration de Gamers-life.fr dans votre vie.
+            </p>
+          </blockquote>
+          <h4>Puis je modifier mes informations ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Vous pouvez à tout moment décider de modifier ou de supprimer vos informations. Pour ce faire, adressez un courriel à support@gamers-life.fr.
+            </p>
+          </blockquote>
+          <h4>Puis-je suivre Gamers-life.fr quelque part ? </h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Notre équipe est active sur les réseaux sociaux et adore partager avec vous les coulisses de leur vie et du site.
+              Nous vous invitons donc chaleureusement à venir échanger avec nous sur notre page <a target="_blank" HREF="{{ facebook_page }}">Facebook</a> et sur notre <a target="_blank" HREF="{{ twitter_page }}">Twitter</a>.
+              Post-scriptum: On adore les photos de chats.
+            </p>
+          </blockquote>
+          <h4>Comment gérez-vous nos infos persos ? </h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Nous le martelons beaucoup, mais un de nos objectifs est de faire de Gamers-life.fr un site communautaires très sûr et fiable.
+              L’équipe est comme vous, agacée d’être constamment secouée par les scandales d’internet autour de nos vies personnelles, visiblement bien peu protégées.
+              Nous essayons donc de garder une certaine indépendance notamment grâce aux logiciels libres utilisés pour le site web, pour gérer vos informations nous-mêmes, et les protéger des entreprises extérieures.
+              Pour plus d’infos, je vous invite à lire le chapitre sur notre <a href="{{ path('quote_cms_faq_mentions')}}">Politique de confidentialité</a>.
+            </p>
+          </blockquote>
+          <h4>Le site ne s’affiche pas correctement… Est-ce normal ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Non, c’est tout à fait anormal. En revanche, il est probable que le site Web ne fonctionne pas correctement si votre navigateur internet n’est pas régulièrement mis à jour. Vous pouvez généralement vérifier si des mises à jour sont disponibles dans les paramètres de votre navigateur.
+              Si le problème persiste, n’hésitez pas à nous le signaler.
+            </p>
+          </blockquote>
+          <h4>Qui est Moo ? J’en entends tout le temps parler…</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Moo est le prénom de l’adorable bestiole, un peu paumée qui siège à la place du “G” de Gamer’s Life.
+              C’est un hérisson à qui il n’arrive que des mésaventures dans la vie de tous les jours. Peut être en a-t-il eu marre et préfère dorénavant regarder celles des autres ? En tout cas, il s’est installé là un beau matin, et ne compte plus jamais repartir.
+            </p>
+          </blockquote>
+          <h4>Nourrissez-vous une passion spéciale pour les hérissons ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Pas spécialement, mais… Nous devons vous avouer que nous adorons les animaux.
+              D’ailleurs, si vous décidez d’adopter un hérisson comme animal de compagnie, voici quelques règles que vous devez absolument ne pas oublier !
+              Un hérisson vit très longtemps en captivité, jusqu’à 8 ans. Vous devrez donc l’assumer sur une période longue. Ne vous engagez pas à la légère, ce n’est pas un jouet que l’on peut jeter.
+              Un hérisson a besoin de chaleur, minimum 21° pour ne pas hiberner. S’il hiberne, cela pourra lui être fatal. (Le hérisson domestique est originaire d’Afrique. S’il a la possibilité physique d'hiberner, ce n’est pas quelque chose qu’il fait dans son milieu naturel).
+              Le hérisson vit la nuit. Ne vous attendez pas à jouer avec toute la journée. S’il aime plutôt le contact et le jeu, vous ne pourrez le déranger que le matin, ou en fin de journée sans le stresser.
+              Un hérisson ne mange pas des granulés pour lapin mais… des croquettes pour chat ! Et de qualité ! (Oubliez les premiers prix). Ce n’est ni un hamster, ni un chien. Renseignez-vous donc à fond sur ses habitudes pour lui préparer un nid douillet.
+            </p>
+          </blockquote>
+          <h4>Où puis-je vous contacter ?</h4>
+          <blockquote class="faq-blockquote">
+            <p>
+              Si vous rencontrez un problème sur le site (contenu, demande de modification) envoyez un mail à l’adresse suivante: contact@gamers-life.fr.
+              Vous pouvez aussi partager avec nous vos vies et vos emmerdes sur les réseaux sociaux: Facebook et Twitter.
+              Quant à l’équipe ? Pour vivre heureux, vivons cachés.
+              Et comme j’adore la mythologie, c’est avec elle qu’on vous quitte: “Apprêter Ariane
+              dû adoucir les ennuis accablants cet éperdu Prince homérique. A Agios parvenaient embobinés les brocarts. Assise, elle fila affectueusement, héroïquement.”
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>
+{% endblock %}

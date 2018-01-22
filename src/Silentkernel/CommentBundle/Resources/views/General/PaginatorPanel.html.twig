@@ -1,0 +1,31 @@
+<div class = "panel panel-default panel-body">
+    <div class ="row">
+        {% if commentData.comment.getTotalItemCount > 0 %}
+            <div class = "col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <h4> <i class = "fa fa-comment"></i>
+                    {{ commentData.comment.getTotalItemCount }} commentaires
+                </h4>
+            </div>
+            <div class = "col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="text-center">
+                    {{ knp_pagination_render(commentData.comment) }}
+                </div>
+            </div>
+        {% else %}
+            <div class = "col-lg-9 col-md-9 col-sm-6 col-xs-12">
+                <h4> <i class="fa fa-comment"></i>
+                    Il n'y a encore aucun commentaire, lancez vous :)
+                </h4>
+            </div>
+        {% endif %}
+        <div class = "col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class = "pull-right">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <a href="#" class ="btn btn-default" onclick="return showAddCommentForm({{ commentData.topic.context }}, {{ commentData.topic.contextId }}, {{ parentComment }});">Commenter !</a>
+                {% else %}
+                    <a href="#" class ="btn btn-default" onclick="return showModalLoginForm();">Se connecter !</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

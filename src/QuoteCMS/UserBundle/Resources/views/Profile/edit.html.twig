@@ -1,0 +1,230 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <ul class="nav nav-tabs">
+        <li class="{% if section == "general" %}active{% endif %}"><a href="#GeneralInformation" data-toggle="tab" aria-expanded="true">Informations générales</a></li>
+        <li class=""><a href="#Stats" data-toggle="tab" aria-expanded="false">Statistiques</a></li>
+        <li class="{% if section == "preferences" %}active{% endif %}"><a href="#MyPref" data-toggle="tab" aria-expanded="false">Mes Préférences</a></li>
+    </ul>
+
+    <div class = "tab-content">
+        <div class="tab-pane fade {% if section == "general" %}active in{% endif %}" id="GeneralInformation">
+            <div class="panel panel-default">
+                <div class = "panel-body">
+                    {% if user.oauth %}
+
+                        <div class = "row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <b>Nom d'utilisateur :</b>
+                            </div>
+                            <div class = "col-lg-9 col-md-8 col-sm-8 col-xs-8">
+                                {{ user.nickname }}
+                            </div>
+                        </div>
+
+                        {% if app.request.cookies.has('REMEMBERME') == false %}
+                            {# This guy is not remembered #}
+                        {% endif %}
+
+                        <div class = "row">
+                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <b>Avatar : </b>
+                            </div>
+                            <div class = "col-lg-9 col-md-8 col-sm-8 col-xs-8">
+                                {% include 'QuoteCMSUserBundle:Avatar:avatarResponsive.html.twig' with {'user' : user } %}
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <b>Adresse email : </b>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8">
+                                {{ user.email }}
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <b>Se souvenir de moi : </b>
+                            </div>
+                            <div class = "col-lg-9 col-md-8 col-sm-8 col-xs-8" id = "OAuthRememberMeMessage">
+                                {% if app.request.cookies.has(remember_me_cookie) %}
+                                    <span class = "text-success">
+                                        Activé
+                                    </span>
+                                {% else %}
+                                    <a href="#" onclick="return OAuthRememberMe();" class = "btn btn-default">
+                                        Se souvenir de moi sur cet appareil
+                                    </a>
+                                    <br />
+                                    <i>(Par défaut la connexion via {{ user.OAuthOwner }} n'active pas la fonction "Se souvenir de moi", vous devez vous reconnecter à chaque visite, pour activer la fonction "Se souvenir de moi" cliquez sur le boutton ci-dessus, cette fonction est indépendante de {{ user.OAuthOwner }}, vous pouvez vous décconnecter de {{ user.OAuthOwner }} et rester connecter sur Gamers-life et inversement)</i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br />
+                        <div class = "row">
+                            <div class = "col-lg-12">
+                                <p class="text-success"><b>Votre adresse email et votre avatar sont gérré par {{ user.OAuthOwner }}</b></p>
+                            </div>
+                        </div>
+
+                    {% else %}
+
+                        <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(formBase) }} method="POST" class="form-horizontal">
+
+                            {#
+                             <div class="form-group">
+                                 {{ form_label(formBase.username,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                                 <div class = "col-lg-8">
+                                     {{ form_widget(formBase.username, { 'attr': {'class' : 'form-control' } }) }}
+                                 </div>
+                             </div>
+                             #}
+
+                            <div id = "profilEditAvatarSection">
+                                {{ render(controller('QuoteCMSUserBundle:Avatar:showAvatarSection')) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(formBase.email,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                                <div class = "col-lg-8">
+                                    {{ form_widget(formBase.email, { 'attr': {'class' : 'form-control' } }) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(formBase.current_password,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                                <div class = "col-lg-8">
+                                    {{ form_widget(formBase.current_password, { 'attr': {'class' : 'form-control' } }) }}
+                                </div>
+                            </div>
+
+                            {{ form_rest(formBase) }}
+                            <div class = "form-group">
+                                <div class="col-lg-8 col-lg-offset-3">
+                                    <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+                                </div>
+                            </div>
+                        </form>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class = "tab-pane fade" id = "Stats">
+            <div class = "panel panel-default tab-content" >
+                <div class = "panel-body">
+                    <div class="row">
+                        <div class="col-lg-8  col-lg-offset-2 col-md-8  col-md-offset-2 col-sm-10  col-sm-offset-1 col-xs-12">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user.inscriptionDate|localizeddate('medium', 'none', 'fr','Europe/Paris','MMM y') }}</span>
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    Membre depuis :
+                                </li>
+                                {% if user.pref.hideemail == false %}
+                                    <li class="list-group-item">
+                                        <span class="badge">{{ user.email }}</span>
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        Mail :
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-lg-offset-1 col-sm-10 col-xs-12 col-sm-offset-1">
+                            <h3>#GL</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user|glPosts }}</span>
+                                    <span class="fa fa-pencil"></span>
+                                    GL publiées :
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user|glComments }}</span>
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                    Commentaires postés :
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user|glLikes }}</span>
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    Likes :
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-lg-offset-1 col-sm-10 col-xs-12 col-sm-offset-1">
+                            <h3>#Forum</h3>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user|forumPosts }}</span>
+                                    <i class="fa fa-comment"></i>
+                                    Sujets :
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user|forumReply }}</span>
+                                    <i class="fa fa-comments-o"></i>
+                                    Réponses :
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user|forumLikes }}</span>
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    Likes :
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "tab-pane fade {% if section == "preferences" %}active in{% endif %}" id = "MyPref">
+            <div class = "panel panel-default tab-content" >
+                <div class = "panel-body">
+                    <form action="{{ path('quote_cms_user_pref_validation') }}" {{ form_enctype(formUserPref) }} method="POST" class="form-horizontal">
+                        <div class="form-group">
+                            {{ form_label(formUserPref.hideEmail,'Email Privé :', { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                            <div class = "col-lg-1">
+                                {{ form_widget(formUserPref.hideEmail, { 'attr': {'class' : 'form-control' } }) }}
+                            </div>
+                            <div class="col-lg-8">
+                                <p class="help-block well well-sm">Cacher votre email sur votre profil public.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(formUserPref.anonymousPost,'Poster Anonyme :', { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                            <div class = "col-lg-1">
+                                {{ form_widget(formUserPref.anonymousPost, { 'attr': {'class' : 'form-control' } }) }}
+                            </div>
+                            <div class="col-lg-8">
+                                <p class="help-block well well-sm">Post vos nouvelles #GL en anonyme.</p>
+                            </div>
+                        </div>
+                        {#<div class="form-group">
+                            {{ form_label(formUserPref.showOnlyPrefGame,'Mes jeux préférés :', { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                            <div class = "col-lg-1">
+                                {{ form_widget(formUserPref.showOnlyPrefGame, { 'attr': {'class' : 'form-control' } }) }}
+                            </div>
+                            <div class="col-lg-8">
+                                <p class="help-block well well-sm">N'afficher que les #GL de vos jeux préférés (Fonction non prise en charge pour le moment) .</p>
+                            </div>
+
+                        </div>#}
+                        {{ form_rest(formUserPref) }}
+                        <div class = "form-group">
+                            <div class="col-lg-8 col-lg-offset-3">
+                                <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class = "tab-pane fade" id = "MyPrefGames">
+            <div class = "panel panel-default tab-content" >
+                <div class = "panel-body">
+                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block title %}{{ parent() }}Mes paramètres{% endblock %}

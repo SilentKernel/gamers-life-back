@@ -1,0 +1,36 @@
+quote_cms_user_navbar:
+    path: /ajax_get/user_bar
+    defaults: { _controller: QuoteCMSUserBundle:Navbar:showUserBar }
+    options:
+         expose: true
+
+quote_cms_user_change_avatar:
+    path: /membre/ajax_get/changer-d-avatar
+    defaults: { _controller: QuoteCMSUserBundle:Avatar:showForm }
+    options:
+         expose: true
+
+quote_cms_user_pref_validation:
+    path: /membre/validation_preferences/
+    defaults: { _controller: QuoteCMSUserBundle:PrefValidator:updatePref }
+
+
+quote_cms_user_avatar_section:
+    path: /membre/ajax_get/avatar_section
+    defaults: { _controller: QuoteCMSUserBundle:Avatar:showAvatarSection }
+    options:
+         expose: true
+
+quote_cms_user_oauth_remember_me:
+    path: /membre/ajax_get/remember_me
+    defaults: { _controller: QuoteCMSUserBundle:OAuth:rememberOAuth }
+    options:
+         expose: true
+
+quote_cms_user_sso_login:
+    path: /sso_login/
+    defaults: { _controller: QuoteCMSUserBundle:SSO:SSOLogin }
+
+quote_cms_user_public_profil:
+    path: /profile/{slug}/
+    defaults: { _controller: QuoteCMSUserBundle:Public:showUser }

@@ -1,0 +1,17 @@
+.faq-blockquote{
+    font-size: 90%;
+}
+
+.anchor-faq {
+    padding-top: 50px;
+    margin-top: -50px;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.piwik-iframe
+{
+    border: 0;
+    height: auto;
+    width: 100%;
+}

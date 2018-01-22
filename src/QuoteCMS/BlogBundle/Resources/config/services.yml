@@ -1,0 +1,12 @@
+services:
+    quote_cms_blog.admin.article:
+        class: QuoteCMS\BlogBundle\Admin\ArticleAdmin
+        arguments: [~, QuoteCMS\BlogBundle\Entity\Article, SonataAdminBundle:CRUD, @service_container]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Blog, label: Article}
+
+    quote_cms_blog.admin.category:
+        class: QuoteCMS\BlogBundle\Admin\CategoryAdmin
+        arguments: [~, QuoteCMS\BlogBundle\Entity\Category, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Blog, label: Category}

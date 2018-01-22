@@ -1,0 +1,48 @@
+services:
+    quote_cms_user.o_auth_provider:
+        class: QuoteCMS\UserBundle\OAuth\OAuthProvider
+        arguments: [@fos_user.user_manager,{facebook: facebookId, google: googleId, twitter: twitterId, microsoft: microsoftId, twitch : twitchId}, @service_container]
+
+    quote_cms_user.failure_authentication_handler:
+        class:        QuoteCMS\UserBundle\Handler\FailureAuthenticationHandler
+        arguments:    [@router, @service_container]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+
+    quote_cms_user.success_authentication_handler:
+        class:        QuoteCMS\UserBundle\Handler\SuccessAuthenticationHandler
+        arguments:    [@router]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+
+    quote_cms_user.user_manager:
+        class: QuoteCMS\UserBundle\Doctrine\UserManager
+        arguments: [@security.encoder_factory, @fos_user.util.username_canonicalizer, @fos_user.util.email_canonicalizer, @fos_user.entity_manager, %fos_user.model.user.class%]
+
+    quotecms_user.avatar_tool:
+        class: QuoteCMS\UserBundle\Avatar\AvatarService
+        arguments: [@doctrine, @kernel]
+
+    quote_cms_user.admin.avatar:
+        class: QuoteCMS\UserBundle\Admin\AvatarAdmin
+        arguments: [~, QuoteCMS\UserBundle\Entity\Avatar, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: User, label: Avatar}
+
+    quotecms_user.profile_form_type:
+        class: QuoteCMS\UserBundle\Form\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: quotecms_user_edit_profile }
+
+    quote_cms_user.admin.user:
+        class: QuoteCMS\UserBundle\Admin\UserAdmin
+        arguments: [~, QuoteCMS\UserBundle\Entity\User, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: User, label: User}
+
+    quote_cms_user.twig.userstats_extension:
+        class: QuoteCMS\UserBundle\Twig\UserStatsExtension
+        arguments: ["@doctrine","@cache_APC"]
+        tags:
+            - { name: twig.extension }

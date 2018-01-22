@@ -1,0 +1,7 @@
+{% if comment.deletedByModeration %}
+  <b>Commentaire supprimé par la modération</b>
+{% elseif comment.deletedByUser %}
+  <b>Commentaire supprimé par {{ comment.user.nickname|title }}</b>
+{% else %}
+  {{ comment.message|markdown|emoticons }}
+{% endif %}

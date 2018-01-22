@@ -1,0 +1,46 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       mail.silentkernel.fr
+    mailer_user:       "contact@gamers-life.fr"
+    mailer_password:   ~
+
+    locale:            fr
+
+    site_host: gamers-life.fr
+
+    # Session Cookie Param
+    session_cookie: GLSESSID
+    remember_me_cookie: GLREMEMBERME
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # Facebook OAuth
+    facebook_id: "_"
+    facebook_secret: "_"
+
+    # Google OAuth
+    google_id: "_"
+    google_secret: "_"
+
+    # Twitter OAuth
+    twitter_consumer_key: "_"
+    twitter_consumer_secret: "_"
+
+    # Microsoft
+    microsoft_client_id: "_"
+    microsoft_secret_key: "_"
+
+    # Twitch
+    twitch_client_id: "_"
+    twitch_secret_key: "_"

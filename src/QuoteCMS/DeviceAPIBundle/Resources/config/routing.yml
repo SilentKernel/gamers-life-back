@@ -1,0 +1,51 @@
+quote_cms_device_api_global:
+    path:     /global-post-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteList:globalPost }
+
+quote_cms_device_api_first:
+    path:     /first-post-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteList:firstPost }
+
+quote_cms_device_api_plus:
+    path:     /plus-post-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteList:plusOnePost }
+
+quote_cms_device_api_least:
+    path:     /least-post-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteList:leastOnePost }
+
+quote_cms_device_api_by_game:
+    path:     /game-post-{gameId}-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteList:getByGameId }
+
+quote_cms_device_api_random:
+    path:     /random-post.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteList:getRandom }
+
+quote_cms_device_api_quote_comments:
+    path:     /comments-post-{postID}-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteComment:getQuoteComment }
+
+quote_cms_device_api_blog_list:
+    path:     /blog-page-{page}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:Blog:getArticlesList }
+
+quote_cms_device_api_vote:
+    path:     /vote-post-{postID}-{value}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:Vote:vote }
+
+# flag-comment-as-reported-COMMENTID.json
+quote_cms_device_api_comment_report:
+    path:     /flag-post-comment-as-reported-{commentID}.json
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:QuoteComment:reportComment }
+
+# Here we prevent using this domain to see the website
+quote_cms_device_api_redirect_base:
+    path:     /
+    defaults: { _controller: QuoteCMSDeviceAPIBundle:Redirect:redirectBase }
+
+#quote_cms_device_api_redirect_base:
+#    path:     /{url}
+#    defaults: { _controller: QuoteCMSDeviceAPIBundle:Redirect:redirect }
+#    requirements:
+#      url: ".+"

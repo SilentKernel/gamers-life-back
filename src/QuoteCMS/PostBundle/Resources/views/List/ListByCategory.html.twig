@@ -1,0 +1,25 @@
+{% extends "::base.html.twig" %}
+{% block order_view %} Jeux {% endblock %}
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li><a href="{{ path('quote_cms_gamme_list_all') }}">Jeux</a></li>
+        <li>Catégories</li>
+        <li class="active">{{ category.name|capitalize }}</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    {% if posts is empty %}
+        <div class="well text-center">
+            Encore aucune #GL dans cette catégorie  !
+        </div>
+    {% else %}
+        {% include 'QuoteCMSPostBundle:List:List.html.twig' with {'posts' : posts, 'notShowFirst' : false } %}
+    {% endif %}
+{% endblock %}
+
+{% block title %}{{ parent() }} Les GL dans la catégorie {{ category.name|title }}{% endblock %}
+
+{% block description %}Liste des #GL dans la catégorie {{ category.name|title }}{% endblock %}
+{% block keywords %}{{ parent() }}, {{ category.name }}{% endblock %}

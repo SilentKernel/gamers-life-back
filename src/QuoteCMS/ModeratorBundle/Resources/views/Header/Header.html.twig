@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                # Posts
+                <span class="badge">{{ posts|length }}</span>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    {% for post in posts %}
+                        {% if loop.index < 5 %}
+                            <li>
+                                <a href="{{ path('quote_cms_moderator_post', {'postId':post.Id}) }}">
+                                    {{ post.story|truncate(50) }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                # Comments
+                <span class="badge">{{ comments|length }}</span>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    {% for comment in comments %}
+                        {% if loop.index < 5 %}
+                            <li>
+                                <a href="{{ path('quote_cms_moderator_comment', {'commentId':comment.id}) }}">
+                                    {{ comment.message|truncate(50) }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class = "panel panel-default">
+            <div class="panel-heading">
+                # Signalement
+                <span class="badge">{{ reports|length }}</span>
+            </div>
+            <div class="panel-body">
+                {% for report in reports %}
+                    {% if loop.index < 5 %}
+                        <li>
+                            <a href="{{ path('quote_cms_moderator_report', {'commentId':report.id}) }}">
+                                {{ report.message|truncate(50) }}
+                            </a>
+                            <span class="badge">{{ report.reportCount }} report(s)</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

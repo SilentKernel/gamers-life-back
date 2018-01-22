@@ -1,0 +1,56 @@
+<div class = "panel panel-default">
+    <div class = "panel-heading">
+        <div class = "row">
+            <div class = "col-lg-12">
+                <strong>
+                    <a href="{{ path('quote_cms_blog_view_single', {'articleSlug': article.slug}) }}">
+                        {{ article.title|title }}
+                    </a>
+                </strong>
+            </div>
+        </div>
+    </div>
+    <div class = "panel-body">
+        <div class = "row ">
+            <div class = "col-lg-12">
+                <div class = "pull-left">
+                    Rédigé par : <span class="glyphicon glyphicon-user"></span> {{ render(controller('QuoteCMSUserBundle:PopOver:usernamePopover', { 'user' : article.user, 'position' :'right', 'originalRequest' : app.request} )) }}
+                </div>
+                <div class = "pull-right">
+                    <i class = "fa fa-calendar"></i> {{ article.creationDate|date('d/m/y') }}
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class = "row">
+            <div class = "col-lg-12">
+                {% include 'QuoteCMSBlogBundle:Single:Parser.html.twig' with {'article' : article, 'truncate' : inList} %}
+                {% if inList %}
+                    <div class = "pull-right">
+                        <a class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Lire la suite de l'article" href="{{ path('quote_cms_blog_view_single', {'articleSlug': article.slug}) }}" >
+                            Lire la suite
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <div class = "row">
+            <div class = "col-lg-6 col-xs-6">
+              {% if inList %}
+              <a href = "{{ path('quote_cms_blog_view_single', {'articleSlug': article.slug}) }}" class = "btn btn-sm btn-default hidden-xs">
+                  <i class = "fa fa-comment"></i> <b>{{ article.id|comment_count_2 }}</b> commentaires
+              </a>
+              <a href = "{{ path('quote_cms_blog_view_single', {'articleSlug': article.slug}) }}" title="Commenter !" class = "btn btn-sm btn-default hidden-lg hidden-sm hidden-md">
+                  <i class = "fa fa-comment"></i> <b>{{ article.id|comment_count_2 }}</b>
+              </a>
+              {% endif %}
+            </div>
+            <div class = "col-lg-6 col-xs-6">
+              <div class = "pull-right">
+                {% include 'QuoteCMSCoreBundle:Social:button.html.twig' with {type : "b", 'subject' : article} %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

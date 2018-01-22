@@ -1,0 +1,4 @@
+services:
+    quote_cms_device_api.service:
+        class: QuoteCMS\DeviceAPIBundle\Service\DeviceDetection
+        arguments: [@doctrine, @mobile_detect.mobile_detector]

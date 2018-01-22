@@ -1,0 +1,10 @@
+<div class = "form-group">
+    <div class = "col-lg-9 col-lg-offset-3" id="ModifyAvatarSection">
+        {% if user.avatar != null %}
+            {% include 'QuoteCMSUserBundle:Avatar:avatarResponsive.html.twig' with {'user' : user } %}
+        {% endif %}
+            <a href="#" onclick="return showModalAvatarForm();" class="btn btn-default">
+                <span class = "glyphicon glyphicon-picture"></span> {% if user.avatar == null %}Sélectionner{% else %}Modifier{% endif %} votre avatar
+            </a>
+    </div>
+</div>

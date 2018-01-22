@@ -1,0 +1,6 @@
+{% for avatar in avatars %}
+<img src = "{{ avatar | imagine_filter('avatar_70') }}">
+{% endfor %}
+{% for screenshot in screenshots %}
+<img src = "{{ screenshot | imagine_filter('screenshot_mobile') }}">
+{% endfor %}

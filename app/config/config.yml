@@ -1,0 +1,286 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: %locale% }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:    { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:
+        name: %session_cookie%
+        cookie_secure: true
+        cookie_httponly: true
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+        lang: "%locale%"
+        asset_version: "v1.0.0b15"
+        remember_me_cookie: %remember_me_cookie%
+        facebook_page: "https://www.facebook.com/GamersLifeFR"
+        twitter_page: "https://twitter.com/GamersLife_FR"
+        twitter_account: "GamersLife_FR"
+
+services:
+    cache_APC:
+        class: Doctrine\Common\Cache\ApcCache
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+    twig.extension.date:
+        class: Twig_Extensions_Extension_Date
+        arguments:
+             - "@translator.default"
+        tags:
+            - { name: twig.extension }
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles: [ "QuoteCMSPostBundle" ]
+    #java: /usr/bin/java
+    filters:
+        uglifycss:
+            bin: "/usr/local/bin/uglifycss"
+        uglifyjs2:
+            bin: "/usr/local/bin/uglifyjs"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+        metadata_cache_driver: apc
+        result_cache_driver: apc
+        query_cache_driver: apc
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    sender_address: "%mailer_user%"
+    spool:     { type: memory }
+
+stof_doctrine_extensions:
+    uploadable:
+        default_file_path: %kernel.root_dir%/../web/media
+        mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
+        default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
+    orm:
+        default:
+            sluggable: true
+            uploadable: true
+            timestampable: true
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: QuoteCMS\UserBundle\Entity\User
+    service:
+         user_manager: quote_cms_user.user_manager
+    from_email:
+        address: "%mailer_user%"
+        sender_name: Gamers Life WTF - Compte
+    profile:
+        form:
+            type: quotecms_user_edit_profile
+
+hwi_oauth:
+  firewall_name: main
+  resource_owners:
+    facebook:
+        type: facebook
+        client_id: %facebook_id%
+        client_secret: %facebook_secret%
+    google:
+        type: google
+        client_id: %google_id%
+        client_secret: %google_secret%
+        scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+    twitter:
+        type: twitter
+        client_id: %twitter_consumer_key%
+        client_secret: %twitter_consumer_secret%
+    microsoft:
+        type:                windows_live
+        client_id:           %microsoft_client_id%
+        client_secret:       %microsoft_secret_key%
+        scope: "wl.basic"
+    twitch:
+        type:          twitch
+        client_id:     %twitch_client_id%
+        client_secret: %twitch_secret_key%
+        scope: "user_read"
+
+# Extra small devices Phones (<768px) Small devices Tablets (≥768px) Medium devices Desktops (≥992px) Large devices Desktops (≥1200px)
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+              cache_prefix: "media/cache"
+    filter_sets:
+        avatar_120:
+            quality: 85
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_110:
+            quality: 85
+            filters:
+                thumbnail: { size: [110, 110], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_100:
+            quality: 85
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_90:
+            quality: 85
+            filters:
+                thumbnail: { size: [90, 90], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_80:
+            quality: 85
+            filters:
+                thumbnail: { size: [80, 80], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_70:
+            quality: 85
+            filters:
+                thumbnail: { size: [70, 70], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_60:
+            quality: 85
+            filters:
+                thumbnail: { size: [60, 60], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_50:
+            quality: 85
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_40:
+            quality: 85
+            filters:
+                thumbnail: { size: [40, 40], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_30:
+            quality: 85
+            filters:
+                thumbnail: { size: [30, 30], mode: outbound }
+                strip: ~
+                interlace:
+                    mode: line
+        avatar_mini:
+           quality: 85
+           filters:
+               thumbnail: { size: [20, 20], mode: outbound }
+               strip: ~
+               interlace:
+                    mode: line
+        screenshot_modal:
+            quality: 85
+            filters:
+                relative_resize: { widen: 889 }
+                strip: ~
+                interlace:
+                    mode: line
+        screenshot_thumb:
+            quality: 85
+            filters:
+                thumbnail: { size: [60, 50], mode: inset }
+                strip: ~
+                interlace:
+                    mode: line
+        screenshot_mobile:
+            quality: 70
+            filters:
+                relative_resize: { heighten: 720 }
+                strip: ~
+                interlace:
+                    mode: line
+        screenshot_mobile_thumb:
+            quality: 70
+            filters:
+                strip: ~
+                thumbnail: { size: [160, 120], mode: inset }
+                interlace:
+                    mode: line
+
+knp_paginator:
+    page_range: 10                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        #sort_field_name: sort          # sort field query parameter name
+        #sort_direction_name: direction # sort direction query parameter name
+        distinct: false                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: :pagination:twitter_bootstrap_v3_pagination.html.twig    # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+mobile_detect:
+    redirect:
+        mobile: ~
+        tablet: ~
+    switch_device_view: ~
+
+knp_markdown:
+    parser:
+        service: silentkernel_comment.parser

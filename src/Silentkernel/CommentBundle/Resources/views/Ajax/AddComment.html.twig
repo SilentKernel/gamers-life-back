@@ -1,0 +1,31 @@
+<div id = "addCommentForm">
+    {% if parentEntity != null %}
+        <div class = "spacer"></div>
+    {% endif %}
+    <div class = "well">
+        <div class="row">
+            <div class = "col-lg-3">
+                <div class = "text-center">
+                    <b>
+                        <i class = "glyphicon glyphicon-user"></i> {{ user.nickname|title }}
+                    </b>
+                    <div class="spacer-xs"></div>
+                    {% include 'QuoteCMSUserBundle:Avatar:avatarResponsive.html.twig' with {'user' : user  } %}
+                </div>
+            </div>
+            <div class = "col-lg-9">
+                <h4>
+                {% if parentEntity != null %}
+                    Répondre à {{ parentEntity.user.nickname }}
+                {% else %}
+                    Nouveau commentaire
+                {% endif %}
+                </h4>
+                <form id="form_add_comment_modal" action="{{ path("silentkernel_comment_add", {"context": context, "contextId": contextId, 'commentParent': parentId} ) }}" method="post" class="form-horizontal" >
+                    {% include 'SilentkernelCommentBundle:Form:CommentForm.html.twig' with {"form" : form} %}
+                    <a href="#" class = "btn btn-danger" onclick="return closeCommentForm();">Fermer !</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

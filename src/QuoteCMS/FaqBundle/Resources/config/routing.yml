@@ -1,0 +1,12 @@
+quote_cms_faq_faq:
+    path:     /faq/
+    defaults: { _controller: QuoteCMSFaqBundle:Main:faq }
+
+
+quote_cms_faq_mentions:
+    path:     /mentions-legales/
+    defaults: { _controller: QuoteCMSFaqBundle:Main:mentions }
+
+quote_cms_faq_reglement:
+    path:     /reglement/
+    defaults: { _controller: QuoteCMSFaqBundle:Main:regulation }

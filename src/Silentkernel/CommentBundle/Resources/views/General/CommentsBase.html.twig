@@ -1,0 +1,21 @@
+<div id="silentkernel_comment">
+    <div id = "commentaires">
+        {%  include 'SilentkernelCommentBundle:General:CommentsGeneralDiv.html.twig' %}
+    </div>
+</div>
+
+
+
+{# Give informations to allow login to reconstruct page when user Ajax Login #}
+{% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <script>
+        var commentData = {
+            context: {{ commentData.topic.context }},
+            contextId: {{ commentData.topic.contextId }},
+            page: {{ commentData.comment.currentPageNumber }},
+            routeId: "{{ commentData.route }}",
+            routeParam: "{{ commentData.routeParam }}",
+            routeSignature: "{{ commentData.routeSignature }}"
+        };
+    </script>
+{% endif %}

@@ -1,0 +1,9 @@
+.comment-text {
+    min-height: 90px;
+}
+
+.comment-notif-link {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: bold;
+}

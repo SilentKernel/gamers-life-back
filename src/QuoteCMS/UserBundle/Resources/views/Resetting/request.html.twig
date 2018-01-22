@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class = "panel panel-info">
+        <div class = "panel-heading">
+            Mot de passe oublié
+        </div>
+        <div class="panel-body">
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="form-horizontal">
+                {% if invalid_username is defined %}
+                    <div class = "alert alert-danger">
+                        <p><span class = "glyphicon glyphicon-remove"></span> {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+                    </div>
+                    {% endif %}
+                <div class = "form-group">
+                    <label class="control-label col-lg-4" for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class = "col-lg-8">
+                        <input class= "form-control" type="text" id="username" name="username" required="required" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class = "col-lg-8 col-lg-offset-4">
+                        <input class="btn btn-default" type="submit" value="{{ 'resetting.request.submit'|trans({}, 'FOSUserBundle') }}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block title %}{{ parent() }}Mot de passe oublié{% endblock %}
+{% block description %}Retrouver le mot de passe de votre compte sur Gamers-life.wtf{% endblock %}
+{% block keywords %}{% endblock %}

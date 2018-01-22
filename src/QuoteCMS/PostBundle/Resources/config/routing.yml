@@ -1,0 +1,59 @@
+quote_cms_post_new:
+    path:     /proposer-votre-gl/
+    defaults: { _controller: QuoteCMSPostBundle:Form:PostForm }
+
+quote_cms_core_post_new_picture:
+    path: /ajax_get/formulaire_upload_image/{postFormId}/
+    defaults: { _controller: QuoteCMSPostBundle:FormUpload:PostPictureForm }
+    options:
+        expose: true
+
+quote_cms_ajax_post_picture:
+    path:     /gl_ajax_get_picture/{postSlug}/{imgNumber}/
+    defaults: { _controller: QuoteCMSPostBundle:Ajax:showPicture }
+    options:
+       expose: true
+    requirements:
+        imgNumber: ^\d+$
+
+quote_cms_ajax_post_video:
+    path:     /gl_ajax_get_video/{post}
+    defaults: { _controller: QuoteCMSPostBundle:Ajax:showVideo }
+    options:
+       expose: true
+
+quote_cms_ajax_post_vote:
+    path:     /gl_ajax_get_vote/{post}/{value}
+    defaults: { _controller: QuoteCMSPostBundle:Ajax:postVote }
+    options:
+       expose: true
+    requirements:
+        _method:  POST
+
+quote_cms_post_category:
+    path:     /jeux/categories/{categorySlug}/
+    defaults: { _controller: QuoteCMSPostBundle:PostsByCategory:showPosts }
+
+quote_cms_post_game:
+    path:     /jeux/{gameSlug}/
+    defaults: { _controller: QuoteCMSPostBundle:PostsByGame:showPosts }
+
+quote_cms_post_plusone:
+    path:     /les-meilleures/
+    defaults: { _controller: QuoteCMSPostBundle:PostsByLike:showPosts }
+
+quote_cms_post_leastone:
+    path:     /les-pires/
+    defaults: { _controller: QuoteCMSPostBundle:PostsByDislike:showPosts }
+
+quote_cms_post_random:
+    path:     /aleatoire/
+    defaults: { _controller: QuoteCMSPostBundle:PostsRandom:showPosts }
+
+quote_cms_post_origin:
+    path:     /premieres/
+    defaults: { _controller: QuoteCMSPostBundle:PostsSinceOrigin:showPosts }
+
+quote_cms_post_view_single:
+    path:     /jeux/{gameSlug}/{postSlug}/
+    defaults: { _controller: QuoteCMSPostBundle:Main:showSingle }

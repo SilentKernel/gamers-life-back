@@ -1,0 +1,16 @@
+services:
+    silentkernel_comment.service:
+        class: Silentkernel\CommentBundle\Service\CommentService
+        arguments: [@doctrine, @knp_paginator, @security.context]
+
+    silentkernel_comment.parser:
+        class: Silentkernel\CommentBundle\Parser\Comment
+
+    silentkernel_comment.validator:
+        class: Silentkernel\CommentBundle\Service\ValidationService
+
+    silentkernel_comment.twig_counter:
+        class: Silentkernel\CommentBundle\Twig\CountService
+        arguments: [@doctrine, @cache_APC]
+        tags:
+            - { name: twig.extension }

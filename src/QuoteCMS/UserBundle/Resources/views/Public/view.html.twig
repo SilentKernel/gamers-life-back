@@ -1,0 +1,93 @@
+{% extends "::base.html.twig" %}
+{% block container %}
+    <div class = "row">
+        <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="well well-lg">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5  col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1 text-center">
+                        <h1>{{ user.nickname|title }}</h1>
+                    </div>
+                    <div class="col-lg-5 col-md-5 hidden-sm hidden-xs text-center">
+                        {% if user.avatar == null %}
+                            <img alt = "Avatar de {{ user.nickname|title }}" class="img-rounded" SRC="{{ '/static/avatar_default.png'| imagine_filter('avatar_120') }}">
+                        {% else %}
+                            <img alt = "Avatar de {{ user.nickname|title }}" class="img-rounded" SRC="{{ user.avatar| imagine_filter('avatar_120') }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1 hidden-lg hidden-md text-center">
+                        {% if user.avatar == null %}
+                            <img alt = "Avatar de {{ user.nickname|title }}" class="img-rounded" SRC="{{ 'static/avatar_default.jpg'| imagine_filter('avatar_120') }}">
+                        {% else %}
+                            <img alt = "Avatar de {{ user.nickname|title }}" class="img-rounded" SRC="{{ user.avatar| imagine_filter('avatar_100') }}">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class = "spacer"></div>
+                <div class="row">
+                    <div class="col-lg-6  col-lg-offset-3 col-md-6  col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge">{{ user.inscriptionDate|localizeddate('medium', 'none', 'fr','Europe/Paris','MMM y') }}</span>
+                                <span class="glyphicon glyphicon-user"></span>
+                                Membre depuis :
+                            </li>
+                            {% if user.pref.hideemail == false %}
+                                <li class="list-group-item">
+                                    <span class="badge">{{ user.email }}</span>
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                    Mail :
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1 col-sm-10 col-xs-12 col-sm-offset-1">
+                        <h3>#GL</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge">{{ user|glPosts }}</span>
+                                <span class="fa fa-pencil"></span>
+                                GL publiées :
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">{{ user|glComments }}</span>
+                                <span class="glyphicon glyphicon-comment"></span>
+                                Commentaires postés :
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">{{ user|glLikes }}</span>
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+                                Likes :
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-lg-offset-1 col-md-offset-1 col-sm-10 col-xs-12 col-sm-offset-1">
+                        <h3>#Forum</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge">{{ user|forumPosts }}</span>
+                                <i class="fa fa-comment"></i>
+                                Sujets :
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">{{ user|forumReply }}</span>
+                                <i class="fa fa-comments-o"></i>
+                                Réponses :
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">{{ user|forumLikes }}</span>
+                                <span class="glyphicon glyphicon-thumbs-up"></span>
+                                Likes :
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}{{ parent() }} {{ user.nickname|title }}{% endblock %}
+{% block keywords %}{{ parent() }}, utilisateur, profil, {{ user.nickname|title }}{% endblock %}
+{% block description %}Profil utilisateur de {{ user.nickname|title }} sur Gamer's Life{% endblock %}

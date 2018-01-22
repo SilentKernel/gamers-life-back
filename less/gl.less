@@ -1,0 +1,134 @@
+body {
+  // Responsive
+  @media (min-width: 0px) {
+    background-image: url("/static/bgl.png");
+    background-repeat: repeat;
+    padding-top: 70px;
+    margin-bottom: 345px;
+  }
+  @media (min-width: @screen-sm-min) {
+    margin-bottom: 296px;
+  }
+  @media (min-width: @screen-md-min) {
+    margin-bottom: 188px;
+  }
+  @media (min-width: @screen-lg-min) {
+    padding-top: 170px;
+    margin-bottom: 169px;
+  }
+}
+
+.big-logo {
+  height: 100px;
+}
+
+.pagination-gl {
+  margin: 0;
+}
+
+.spacer-xs{
+  height: 5px;
+}
+.spacer-sm{
+  height: 12px;
+}
+.spacer{
+  height: 20px;
+}
+.spacer-md{
+  height: 25px;
+}
+
+.spacer-xl{
+  height: 30px;
+}
+
+/*
+  Why do bootstrap like padding so much ??? WHYYYYYYYYYYYYY WHYYYYYYYYYYYYYY !
+*/
+
+.no-padding-right{
+  padding-right:0 !important;
+}
+
+.no-padding-left{
+  padding-left:0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.img-logo
+{
+  height: 40px;
+  margin-top: -10px;
+}
+
+.shadowed {
+  box-shadow: 0 0 30px black;
+}
+
+.media{
+  background-color: @body-bg;//darken(@body-bg, 5%);
+  margin-top: 5px;
+  //border-radius: @border-radius-base;
+  //border-top: 1px solid @gray-dark;//@gray-dark;
+  //border-bottom: 1px solid @gray-dark;
+  padding: 10px;
+}
+
+.a-clear{
+  text-decoration:none !important;
+}
+
+.video-btn{
+  display: inline-block;
+  width: 60px;
+  height: 40px;
+  border-radius: @border-radius-base;
+  background-color: @gray-dark;
+  text-align: center;
+  line-height:40px;
+  vertical-align: middle;
+}
+
+.img-link{
+  margin: 0;
+  border:1px solid @gray-light;
+  opacity: 0.4;
+}
+
+.img-link:hover{
+  border-color:@gl-color;
+  opacity: 1;
+}
+
+.blockquote-comment-title{
+  color: @gray-light;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.blockquote-comment {
+  margin-left: 5%;
+  color: @gray-light;
+  font-size: inherit;
+}
+
+// this is for sticky footer !
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  background-color : @gray-base;
+  width: 100%;
+}

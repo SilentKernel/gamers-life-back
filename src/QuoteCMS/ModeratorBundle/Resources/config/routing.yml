@@ -1,0 +1,25 @@
+quote_cms_moderator_index:
+    path:     /
+    defaults: { _controller: QuoteCMSModeratorBundle:Main:index }
+
+quote_cms_moderator_mobile_generate_pics:
+    path:     /mpg
+    defaults: { _controller: QuoteCMSModeratorBundle:Main:mobileGeneratePics }
+
+quote_cms_moderator_post:
+    path:     /post/{postId}
+    defaults: { _controller: QuoteCMSModeratorBundle:FormPost:PostForm }
+    requirements:
+            postId: ^\d+$
+
+quote_cms_moderator_comment:
+    path:     /comment/{commentId}
+    defaults: { _controller: QuoteCMSModeratorBundle:FormComment:CommentForm }
+    requirements:
+            postId: ^\d+$
+
+quote_cms_moderator_report:
+    path:     /report/{commentId}
+    defaults: { _controller: QuoteCMSModeratorBundle:FormReportComment:ReportCommentForm }
+    requirements:
+            postId: ^\d+$

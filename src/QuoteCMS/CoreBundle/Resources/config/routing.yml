@@ -1,0 +1,15 @@
+quote_cms_core_homepage:
+    path:     /
+    defaults: { _controller: QuoteCMSCoreBundle:Main:home }
+
+quote_cms_core_cookie_more_infos:
+    path: /ajax_get/plus-infos-cookies
+    defaults: { _controller: QuoteCMSCoreBundle:Ajax:cookiesMoreInfoAjax }
+    options:
+        expose: true
+
+quote_cms_core_refresh_social:
+    path: /ajax_get/social_update/{type}/{subjectId}/{socialName}
+    defaults: { _controller: QuoteCMSCoreBundle:Ajax:refreshShareCount }
+    options:
+        expose: true

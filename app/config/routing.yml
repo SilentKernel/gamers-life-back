@@ -1,0 +1,126 @@
+# OAuth Route
+facebook_login:
+    pattern: /login/oauth/check-facebook
+    host: %site_host%
+
+google_login:
+    pattern: /login/oauth/check-google
+    host: %site_host%
+
+#twitter_login:
+#    pattern: /login/oauth/check-twitter
+
+microsoft_login:
+    pattern: /login/oauth/check-microsoft
+    host: %site_host%
+
+twitch_login:
+    path: /login/oauth/check-twitch
+    host: %site_host%
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+    host: %site_host%
+
+#hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /login/oauth
+
+# Sonata admin
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+    host: %site_host%
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+    host: %site_host%
+
+# FoS User
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    host: %site_host%
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /inscription
+    host: %site_host%
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /mot-de-passe-oublie
+    host: %site_host%
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /membre/
+    host: %site_host%
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /membre/profile
+    host: %site_host%
+
+# FoS JS Routing
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    host: %site_host%
+
+# Image resizer
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+    host: %site_host%
+
+# Own routes
+quote_cms_device_api:
+    resource: "@QuoteCMSDeviceAPIBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: api.gamers-life.fr
+
+quote_cms_core:
+    resource: "@QuoteCMSCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%
+
+quote_cms_blog:
+    resource: "@QuoteCMSBlogBundle/Resources/config/routing.yml"
+    prefix: /blog
+    host: %site_host%
+
+quote_cms_game:
+    resource: "@QuoteCMSGameBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%
+
+quote_cms_post:
+    resource: "@QuoteCMSPostBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%
+
+quote_cms_user:
+    resource: "@QuoteCMSUserBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%
+
+quote_cms_moderator:
+    resource: "@QuoteCMSModeratorBundle/Resources/config/routing.yml"
+    prefix:   /moderation/
+    host: %site_host%
+
+silentkernel_comment:
+    resource: "@SilentkernelCommentBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%
+
+quote_cms_faq:
+    resource: "@QuoteCMSFaqBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%
+
+silentkernel_se_auto_complete:
+    resource: "@SilentkernelSEAutoCompleteBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: %site_host%

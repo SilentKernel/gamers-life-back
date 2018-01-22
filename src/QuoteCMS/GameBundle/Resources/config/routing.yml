@@ -1,0 +1,17 @@
+quote_cms_game_g_auto_complete:
+    path:     /autocomplete/gg/games.json
+    defaults: { _controller: QuoteCMSGameBundle:gAutoCompletion:getKnownGameAE }
+    options:
+        expose: true
+
+quote_cms_game_new:
+    path:     /moderation/game/add
+    defaults: { _controller: QuoteCMSGameBundle:Form:GameForm }
+
+quote_cms_category_new:
+    path:     /moderation/category/add
+    defaults: { _controller: QuoteCMSGameBundle:Form:CategoryForm }
+
+quote_cms_gamme_list_all:
+    path:     /jeux/
+    defaults: { _controller: QuoteCMSGameBundle:Main:listAll }

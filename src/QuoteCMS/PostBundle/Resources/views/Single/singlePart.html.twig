@@ -1,0 +1,147 @@
+<div class = "panel panel-default">
+    <div class = "panel-heading">
+        <div class = "row">
+            <div class = "col-lg-6 col-md-6 hidden-sm hidden-xs">
+                <div class = "pull-left">
+                    {% if inList %}
+                    <a href = "{{ path('quote_cms_post_view_single', {'postSlug': post.slug, 'gameSlug' : post.game.slug }) }}">
+                        {% endif %}
+                        <b>{{ post.title }} </b>
+                        {% if inList %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class = "hidden-lg hidden-md col-sm-7 col-xs-7">
+                <div class = "pull-left">
+                    {% if inList %}
+                    <a href = "{{ path('quote_cms_post_view_single', {'postSlug': post.slug, 'gameSlug' : post.game.slug }) }}">
+                        {% endif %}
+                        <b>{{ post.title| truncate(15, true, '...') }} </b>
+                        {% if inList %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class = "col-lg-1 col-md-1 hidden-sm hidden-xs">
+                <div class = "text-center">
+                    {% if inList %}
+                    <a href = "{{ path('quote_cms_post_view_single', {'postSlug': post.slug, 'gameSlug' : post.game.slug }) }}">
+                        {% endif %}
+                        <b>#{{ post.id }}</b>
+                        {% if inList %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class = "col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <div class = "pull-right">
+                    <b>
+                        <i class="fa fa-gamepad"></i>
+                        <a title = "Voir les #GL sur {{ post.game.name }}" href = "{{ path("quote_cms_post_game", { gameSlug : post.game.slug })}}">
+                          {{ post.game.name }}
+                        </a>
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "panel-body">
+        <div class = "row ">
+            <div class = "col-lg-12">
+                <div class = "pull-left">
+
+                    {% if not post.anonymous %}
+                    {% if post.user.avatar == null %}
+                    <span class="glyphicon glyphicon-user"></span>
+                    {% else %}
+                    <img alt = "Avatar de {{ post.user.nickname }}" class="img-rounded" SRC="{{ post.user.avatar| imagine_filter('avatar_mini') }}">
+                    {% endif %}
+                    {{ render(controller('QuoteCMSUserBundle:PopOver:usernamePopover', { 'user' : post.user, 'position' :'right', 'originalRequest' : app.request} )) }}
+                    {% else %}
+                    <span class="glyphicon glyphicon-user"></span> Anonyme
+                    {% endif %}
+
+                </div>
+
+                <div class = "pull-right">
+                    <i class = "fa fa-calendar"></i> {{ post.creationDate|date('d/m/y') }}
+                </div>
+            </div>
+        </div>
+        <div class="spacer-xs"></div>
+        <div class = "row">
+            <div class = "col-lg-12">
+                <p>
+                    {% include "QuoteCMSPostBundle:Single:storyParse.html.twig" with {'post': post} %}
+                </p>
+            </div>
+        </div>
+        <div class = "row">
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12"> {# col-lg-11 col-xs-10 col-sm-11 col-md-11#}
+                {% for picture in post.pictures %}
+                {% if loop.index == 1 %}
+
+
+                <span class="glyphicon glyphicon-picture"></span><span class = "hidden-xs"> Capture(s) d'écran(s)</span> :
+                {% endif %}
+                {% if loop.index < 5 %}
+                <a href = "#" data-toggle="tooltip" data-placement="top" class="{% if loop.index > 3 %}hidden-xs{% endif %} a-clear" title="Voir la capture d'écran {{ loop.index }} de cette Gamer's Life"  onclick='return showPostPicture("{{ post.slug }}", {{ loop.index }});'>
+                    <img class = "img-rounded img-link" src = "{{ picture | imagine_filter('screenshot_thumb') }}" alt="Capture d'écran de {{ post.title }}">
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% if post.videoUrl != null %}
+            <div class = "col-lg-12 col-xs-12 col-sm-12 col-md-12"> {# col-lg-1 col-xs-2 col-sm-1 col-md-1#}
+                <span class="fa fa-file-video-o"></span><span class = "hidden-xs"> Vidéo</span> :
+                <a href="#" onclick="return showPostVideo({{ post.id }})" data-toggle="tooltip" data-placement="top" title="Regarder la vidéo de cette #GL" class = "a-clear">
+                    <div class="img-link video-btn lead">
+                        <i class="fa fa-youtube-play"></i>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            <div class="spacer-sm col-xs-12"></div>
+            {# FOOTER LG MD SM#}
+            <div class = "col-lg-4 col-md-5 col-sm-4 hidden-xs">
+                <a href="#" onclick="return quoteVote({{ post.id }}, 1);" class = "btn btn-sm btn-default hidden-xs">
+                    <span class = "fa fa-thumbs-up"></span> Piquant <span class = "label label-default">{{ post.plusone }}</span>
+                </a>
+                <a href="#" onclick="return quoteVote({{ post.id }}, -1);" class = "btn btn-sm btn-default hidden-xs">
+                    <span class = "fa fa-thumbs-down"></span> Nul <span class = "label label-default">{{ post.leastone }}</span>
+                </a>
+            </div>
+            <div class = "hidden-lg hidden-md hidden-sm col-xs-5 no-padding-right">
+                <div class = "btn-group" role="group">
+                    <a href="#" onclick="return quoteVote({{ post.id }}, 1);" title="Piquant !" class = "btn btn-sm btn-default hidden-lg hidden-sm hidden-md">
+                        <span class = "fa fa-thumbs-up"></span><span class = "label label-default">{{ post.plusone }}</span>
+                    </a>
+                    <a href="#" onclick="return quoteVote({{ post.id }}, -1);" title="Nul !" class = "btn btn-sm btn-default hidden-lg hidden-sm hidden-md">
+                        <span class = "fa fa-thumbs-down"></span><span class = "label label-default">{{ post.leastone }}</span>
+                    </a>
+                </div>
+            </div>
+            {% if inList %}
+            <div class = "col-lg-4 col-md-2 col-sm-4 col-xs-2 no-padding-left no-padding-right">
+                <div class = "text-center">
+                    <a href = "{{ path('quote_cms_post_view_single', {'postSlug': post.slug, 'gameSlug' : post.game.slug }) }}" class = "btn btn-sm btn-default hidden-xs">
+                        <i class = "fa fa-comment"></i> Commenter ({{ post.id|comment_count_1 }})
+                    </a>
+
+                    <a href = "{{ path('quote_cms_post_view_single', {'postSlug': post.slug, 'gameSlug' : post.game.slug }) }}" title="Commenter !" class = "btn btn-sm btn-default hidden-lg hidden-sm hidden-md">
+                        <i class = "fa fa-comment"></i> {{ post.id|comment_count_1 }}
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <div class = "col-lg-4 col-md-2 col-sm-4 col-xs-2"></div>
+            {% endif %}
+            <div class = "col-lg-4 col-md-5 col-sm-4 col-xs-5">
+                <div class = "pull-right">
+                    {% include 'QuoteCMSCoreBundle:Social:button.html.twig' with {type : "q", 'subject' : post} %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

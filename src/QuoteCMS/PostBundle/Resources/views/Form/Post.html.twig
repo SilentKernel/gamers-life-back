@@ -1,0 +1,89 @@
+{% extends "::base.html.twig" %}
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li class="active">Proposer votre #GL</li>
+    </ol>
+{% endblock %}
+
+
+{% block container %}
+    <div class = "panel panel-default">
+        <div class = "panel-heading">
+            Proposer votre Gamer's Life
+        </div>
+        <div class = "panel-body">
+            {{ form_start(form, {'attr' : {'class' : 'form-horizontal', "id" : "addPostForm"}, 'action' : path('quote_cms_post_new') } ) }}
+
+            <div class = "form-group">
+                {{ form_label(form.game,"Jeu :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.game, {"attr" : { "class" : "form-control"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group">
+                <div class = "col-lg-8 col-lg-offset-3">
+                    <p>
+                        (Si le jeu n'est pas dans la liste ou que vous souhaitez le chercher via mot clef utlisez le champ suivant)
+                    </p>
+                </div>
+            </div>
+
+            <div class = "form-group">
+                {{ form_label(form.tempGameName,"Jeu (entrée directe) : ", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.tempGameName, {"attr" : { "class" : "form-control", "autocomplete" : "off"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group">
+                {{ form_label(form.story,"Votre histoire :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.story, {"attr" : { "class" : "form-control", 'rows' : "10"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group">
+                <div class = "col-lg-8 col-lg-offset-3">
+                    <a href="#" class = "btn btn-default" onclick="return showModalUploadForm('{{ form.vars.value.formUID }}');"><span class="glyphicon glyphicon-picture"></span> Ajouter une ou plusieurs capture d'écran</a>
+                </div>
+            </div>
+
+            <div class = "form-group">
+                <div class = "col-lg-8 col-lg-offset-3">
+                    <p>
+                        L'entrée suivante n'est pas obligatoire, si vous le souhaitez vous pouvez ajouter un lien Youtube ou Dailymotion pour illustrer votre histoire
+                    </p>
+                </div>
+            </div>
+
+            <div class = "form-group">
+                {{ form_label(form.videoUrl,"Lien vidéo :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.videoUrl, {"attr" : { "class" : "form-control"}}) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div class = "form-group">
+                <div class="col-lg-8 col-lg-offset-3">
+                    <input class = "btn btn-default" type="submit" id="_submit" name="_submit" value="Envoyer cette #GL" />
+                    <a href="#" class = "btn btn-primary" onclick="return showAdviceModal();"><i class = "glyphicon glyphicon-info-sign"></i> Conseils</a>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    var gameAutoCompletion = null;
+    initGamePostAE();
+</script>
+{% endblock %}
+{% block new_quote_nav_bar %}active{% endblock %}
+{% block title %}{{ parent() }} Proposer votre Gamer's life{% endblock %}
+{% block description %}Proposer votre histoire sur Gamer's Life{% endblock %}

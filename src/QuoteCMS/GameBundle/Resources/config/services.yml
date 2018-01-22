@@ -1,0 +1,12 @@
+services:
+    quote_cms_game.admin.game:
+        class: QuoteCMS\GameBundle\Admin\GameAdmin
+        arguments: [~, QuoteCMS\GameBundle\Entity\Game, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Game, label: Game}
+
+    quote_cms_game.admin.category:
+        class: QuoteCMS\GameBundle\Admin\CategoryAdmin
+        arguments: [~, QuoteCMS\GameBundle\Entity\Category, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Game, label: Category}

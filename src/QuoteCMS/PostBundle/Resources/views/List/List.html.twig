@@ -1,0 +1,14 @@
+{% if posts != null %}
+    {% for post in posts %}
+        {% if notShowFirst %}
+            {% if loop.index != 1 %}
+                {% include 'QuoteCMSPostBundle:Single:singlePart.html.twig' with {'post' : post, 'inList' : true} %}
+            {% endif %}
+        {% else %}
+            {% include 'QuoteCMSPostBundle:Single:singlePart.html.twig' with {'post' : post, 'inList' : true} %}
+        {% endif %}
+    {% endfor %}
+    <div class="text-center">
+        {{ knp_pagination_render(posts) }}
+    </div>
+{% endif %}

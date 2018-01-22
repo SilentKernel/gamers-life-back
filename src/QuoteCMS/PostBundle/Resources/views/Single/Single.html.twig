@@ -1,0 +1,51 @@
+{% extends "::base.html.twig" %}
+
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li><a href="{{ path('quote_cms_gamme_list_all') }}">Jeux</a></li>
+        <li><a href="{{ path('quote_cms_post_game',{'gameSlug' : post.game.slug}) }}">{{ post.game.name }}</a></li>
+        <li class="active">{{ post.title|capitalize }}</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    {% include 'QuoteCMSPostBundle:Single:singlePart.html.twig' with {'post' : post, 'inList' : false} %}
+
+
+    {# Silentkernel's Comment Bundle :) #}
+    {% include 'SilentkernelCommentBundle:General:CommentsBase.html.twig' with {'commentData' : commentData} %}
+
+
+    {#   <ul class="nav nav-tabs">
+           <li class="active"><a href="#basicComment" data-toggle="tab" aria-expanded="true">Commentaires</a></li>
+           <li class=""><a href="#ForumComment" data-toggle="tab" aria-expanded="false">En direct du forum</a></li>
+       </ul>
+
+       <div class = "panel panel-default panel-body">
+           <div id="myTabContent" class="tab-content">
+               <div class="tab-pane fade active in" id="basicComment">
+
+               </div>
+               <div class="tab-pane fade" id="ForumComment">
+                   <div id="discourse-comments"></div>
+                   <script type="text/javascript">
+                       var discourseUrl = "https://forum.gamers-life.wtf/",
+                               discourseEmbedUrl = '{{ url("quote_cms_post_view_single", { 'gameSlug' : post.game.slug, 'postSlug' : post.slug }) }}';
+
+                       (function() {
+                           var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+                           d.src = discourseUrl + 'javascripts/embed.js';
+                           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+                       })();
+                   </script>
+               </div>
+           </div>
+       </div>
+   #}
+{% endblock %}
+
+
+{% block title %}{{ parent() }} {{ post.game.name }} - {{ post.title }}{% endblock %}
+{% block keywords %}{{ parent() }}, {{ post.game.category.name }}, {{ post.game.name }}{% endblock %}
+{% block description %}{{ post.title }} (Gamer's Life) est une histoire qui s'est passée sur {{ post.game.name }} ({{ post.game.category.name }}).{% endblock %}

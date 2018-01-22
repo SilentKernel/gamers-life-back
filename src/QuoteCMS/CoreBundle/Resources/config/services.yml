@@ -1,0 +1,10 @@
+services:
+    quote_cms_core_upload_validator:
+        class: QuoteCMS\CoreBundle\Service\UploadValidator
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    quote_cms_core.admin.keyword:
+        class: QuoteCMS\CoreBundle\Admin\KeywordAdmin
+        arguments: [~, QuoteCMS\CoreBundle\Entity\Keyword, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Keyword, label: Keyword}

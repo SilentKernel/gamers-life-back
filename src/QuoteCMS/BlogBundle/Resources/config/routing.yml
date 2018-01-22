@@ -1,0 +1,7 @@
+quote_cms_blog_homepage:
+    path:     /
+    defaults: { _controller: QuoteCMSBlogBundle:Main:home }
+
+quote_cms_blog_view_single:
+    path:     /{articleSlug}/
+    defaults: { _controller: QuoteCMSBlogBundle:Main:showSingle }

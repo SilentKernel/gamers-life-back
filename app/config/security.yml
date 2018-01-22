@@ -1,0 +1,53 @@
+# app/config/security.yml
+security:
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                success_handler: quote_cms_user.success_authentication_handler
+                failure_handler: quote_cms_user.failure_authentication_handler
+            remember_me:
+                name: %remember_me_cookie%
+                key:      "%secret%"
+                lifetime: 31536000
+                path:     /
+                secure:   true
+                httponly: true
+                domain:   ~
+            oauth:
+                success_handler: quote_cms_user.success_authentication_handler
+                resource_owners:
+                    facebook: "/login/oauth/check-facebook"
+                    google: "/login/oauth/check-google"
+                    microsoft: "/login/oauth/check-microsoft"
+                    twitch: "/login/oauth/check-twitch"
+                    #twitter: "/login/oauth/check-twitter"
+
+                login_path:        /login
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: quote_cms_user.o_auth_provider
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/logout$, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/membre/, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/moderation/, role: ROLE_MODERATOR }
+        - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+    role_hierarchy:
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_MODERATOR

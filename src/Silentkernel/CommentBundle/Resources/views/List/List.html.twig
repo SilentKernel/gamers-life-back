@@ -1,0 +1,6 @@
+<div id = "comment-list">
+    {% for comment in commentData.comment %}
+        {% include 'SilentkernelCommentBundle:Single:Single.html.twig' with {'comment' : comment} %}
+    {% endfor %}
+</div>
+<div class = "spacer"></div>

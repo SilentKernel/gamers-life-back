@@ -1,0 +1,83 @@
+<div class="modal fade" id = "registerModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">S'enregistrer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-lg-12" id = "registerModalMessage"></div>
+          <div class="col-md-8 col-lg-8">
+            <form id="form_register_modal" action="{{ path('fos_user_registration_register') }}" method="post" class="form-horizontal" >
+
+              {# Username #}
+              <div class="form-group">
+
+                <label class="col-md-4 col-lg-4 control-label" for="username_register_modal">Nom d'utilisateur : </label>
+                <div class="col-md-8 col-lg-8">
+                  <input id="username_register_modal" type="text" name="fos_user_registration_form[username]" required="required" maxlength="255" pattern=".{2,}" class="form-control" required="required"  />
+                  <div id = "registerUsernarmeErrorModal"></div>
+                </div>
+              </div>
+
+              {# Email #}
+              <div class="form-group">
+
+                <label class="col-md-4 col-lg-4 control-label" for="email_register_modal">Adresse e-mail : </label>
+                <div class="col-md-8 col-lg-8">
+                  <input id="email_register_modal" type="email"  name="fos_user_registration_form[email]" required="required" class="form-control" required="required" />
+                  <div id = "registerEmailErrorModal"></div>
+                </div>
+              </div>
+
+              {# Password #}
+              <div class="form-group">
+                <label class="col-md-4 col-lg-4 control-label" for="register_first_password_modal">Mot de passe : </label>
+                <div class="col-md-8 col-lg-8">
+                  <input type="password"  name="fos_user_registration_form[plainPassword][first]" required="required" class="form-control" required="required" id="register_first_password_modal" />
+                  <div id = "registerPasswordErrorModal"></div>
+                </div>
+              </div>
+
+              {# Password confirmation #}
+              <div class="form-group">
+                <label class="col-md-4 col-lg-4 control-label" for="register_second_password_modal">Vérification : </label>
+                <div class="col-md-8 col-lg-8">
+                  <input type="password" name="fos_user_registration_form[plainPassword][second]" required="required" class="form-control" required="required" id="register_second_password_modal" />
+                </div>
+              </div>
+
+              {# csrf Token (will use it if username already exist) #}
+              <div id = "register_csrf_modal">
+                {{ form_widget(form._token,{'attr': {'class' : 'register_csrf_class_modal' } }) }}
+              </div>
+
+              <div class = "form-group">
+                <div class="col-md-8 col-lg-8 col-md-offset-4 col-lg-offset-4">
+                  <button type="submit" id="submit_register_modal" class="btn btn-default">S'inscrire</button>
+                  <button id="close_register_show_login_modal" onclick="return closeRegisterShowLogin();" class="btn btn-primary">J'ai déjà un compte</button>
+                  <button id="cancel_register_modal" type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-facebook" HREF="{{url('hwi_oauth_service_redirect',{service: "facebook"})}}">
+              <i class="fa fa-facebook"></i> Connexion avec Facebook
+            </a>
+            <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-google-plus" HREF="{{url('hwi_oauth_service_redirect',{service: "google"})}}">
+              <i class="fa fa-google-plus"></i> Connexion avec Google
+            </a>
+            <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-microsoft" HREF="{{url('hwi_oauth_service_redirect',{service: "microsoft"})}}">
+              <i class="fa fa-windows"></i> Connexion avec Microsoft
+            </a>
+            <a onclick="return oAuthLoginClick();" class="btn btn-block btn-social btn-twitch" HREF="{{url('hwi_oauth_service_redirect',{service: "twitch"})}}">
+                <i class="fa fa-twitch"></i> Connexion avec Twitch
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

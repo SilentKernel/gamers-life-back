@@ -1,0 +1,50 @@
+{% extends "::base.html.twig" %}
+
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_core_homepage') }}">Accueil</a></li>
+        <li class="active">Jeux</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    <div class ="row">
+        <div class="col-lg-12 text-center">
+            <div class = "panel panel-default">
+                <div class = "panel-heading">
+                    Liste des Jeux
+                </div>
+                <div class = "panel-body">
+                    <div class = "col-lg-12">
+                        {% for letter in gamesIndex %}
+                            <a href="#jeux-{{ letter|upper }}">{{ letter|upper }}</a> .
+                        {% endfor %}
+                    </div>
+
+
+                    {% for key,g in games %}
+                        <div class="col-lg-12">
+                            <div class= "panel panel-default">
+                                <div class="panel-heading" id="jeux-{{ key|upper }}">
+                                    {{ key|capitalize }}
+                                </div>
+                                <div class="panel-body">
+                                {% for game in games[key]  %}
+
+                                    <a href="{{ path('quote_cms_post_game',{'gameSlug':game.ginfo.slug}) }}" class="list-group-item">{{ game.ginfo.name|title }} <span class = "badge">{{ game.postsCount }}</span></a>
+
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}{{ parent() }} Liste des Jeux{% endblock %}
+{% block order_view %}Jeux{% endblock %}
+{% block description %}Liste des jeux disponible sur Gamer's Life{% endblock %}
+{% block keywords %}{{ parent() }}, liste{% endblock %}

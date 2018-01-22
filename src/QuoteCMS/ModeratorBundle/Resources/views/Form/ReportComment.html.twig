@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class = "panel panel-default">
+        <div class = "panel-heading">
+            Signalement d'un commentaire
+        </div>
+        <div class = "panel-body">
+            {{ form_start(form, {'attr' : {'class' : 'form-horizontal', "id" : "validationPostForm"}, 'action' : path('quote_cms_moderator_report',{'commentId':comment.id}) } ) }}
+
+            <div class = "form-group">
+                {{ form_label(form.message,"Commentaire :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.message, {"attr" : { "class" : "form-control", 'rows' : "10"}}) }}
+                </div>
+            </div>
+
+            <div class = "form-group">
+                {{ form_label(form.message,"Signalement :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                <div class = "col-lg-8">
+                    {{ form_widget(form.reportCount, {"attr" : { "class" : "form-control"}}) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div class = "form-group">
+                <div class="col-lg-8 col-lg-offset-3">
+                    <input class = "btn btn-success" type="submit" id="_submit" name="_submit" value="Valider" />
+                    <input class = "btn btn-danger" type="submit" id="_submit" name="_submit" value="Supprimer" />
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block title %}{{ parent() }} Signalement de commentaire{% endblock %}

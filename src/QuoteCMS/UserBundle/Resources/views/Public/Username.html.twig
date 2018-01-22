@@ -1,0 +1,16 @@
+<a
+        href="{{ path('quote_cms_user_public_profil', {'slug': user.slug }) }}"
+        data-toggle="popover"
+        data-trigger="hover"
+        data-popover-content="#po_user_{{ user.id }}"
+        data-placement={{ position }}
+        >
+    <b>{{ user.nickname|title }}</b>
+</a>
+{% if showDiv %}
+    <div id="po_user_{{ user.id }}" class="hidden">
+        <div class="popover-body">
+            {% include 'QuoteCMSUserBundle:Public:Popover.html.twig' with {'user' : user  } %}
+        </div>
+    </div>
+{% endif %}

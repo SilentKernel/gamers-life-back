@@ -1,0 +1,20 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Se Balader
+    </div>
+    <div class="panel-body">
+        <div class = "list-group no-margin-bottom">
+
+            <a class = "list-group-item" href="{{ path('quote_cms_core_homepage') }}"><i class="fa fa-sort-numeric-desc"></i> Les dernières</a>
+            <a class = "list-group-item" href="{{ path('quote_cms_gamme_list_all') }}"><i class="fa fa-gamepad"></i> Jeux</a>
+            <a class = "list-group-item" href="{{ path('quote_cms_post_origin') }}"><i class="fa fa-sort-numeric-asc"></i> Les premières</a>
+            <a class = "list-group-item" href="{{ path('quote_cms_post_plusone') }}"><i class="fa fa-thumbs-o-up"></i> Les mieux notées</a>
+            <a class = "list-group-item" href="{{ path('quote_cms_post_leastone') }}"><i class="fa fa-thumbs-o-down"></i> Les moins bien notées</a>
+            <a class = "list-group-item" href="{{ path('quote_cms_post_random') }}"><i class="fa fa-random"></i> Aléatoire</a>
+
+            {% if is_granted('ROLE_MODERATOR') %}
+          <a class = "list-group-item" href="{{ path('quote_cms_moderator_index') }}"><i class="fa fa-lock"></i> <b>Moderation</b></a>
+        {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div id = "comment-panel-top">
+    {%  include 'SilentkernelCommentBundle:General:PaginatorPanel.html.twig' with {'parentComment' : -1} %}
+</div>
+
+{% include 'SilentkernelCommentBundle:List:List.html.twig' with {'commentData' : commentData} %}
+
+{% if commentData.comment.getTotalItemCount > 0 %}
+    <div id = "comment-panel-bottom">
+        {%  include 'SilentkernelCommentBundle:General:PaginatorPanel.html.twig' with {'parentComment' : -2} %}
+    </div>
+{% endif %}

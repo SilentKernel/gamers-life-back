@@ -1,0 +1,65 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class = "panel panel-default">
+        <div class = "panel-heading">
+            Inscription
+        </div>
+        <div class = "panel-body">
+            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-horizontal">
+                <div class="form-group">
+                    {{ form_label(form.username,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                    <div class = "col-lg-8">
+                        {{ form_widget(form.username, { 'attr': {'class' : 'form-control' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.email,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                    <div class = "col-lg-8">
+                        {{ form_widget(form.email, { 'attr': {'class' : 'form-control' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.plainPassword.first,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                    <div class = "col-lg-8">
+                        {{ form_widget(form.plainPassword.first, { 'attr': {'class' : 'form-control' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.plainPassword.second,null, { 'label_attr': {'class' : 'col-lg-3 control-label' } }) }}
+                    <div class = "col-lg-8">
+                        {{ form_widget(form.plainPassword.second, { 'attr': {'class' : 'form-control' } }) }}
+                    </div>
+                </div>
+
+                {{ form_rest(form) }}
+                <div class = "form-group">
+                    <div class = "col-lg-8 col-lg-offset-3">
+                        <input class ="btn btn-default" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+                        <a href="{{ path("fos_user_security_login") }}" onclick="closeRegisterShowLogin();return false;" class="btn btn-primary">J'ai déjà un compte</a>
+                        <div class="pull-right">
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Facebook" class="btn btn-social-icon btn-facebook" HREF="{{url('hwi_oauth_service_redirect',{service: "facebook"})}}">
+                              <i class="fa fa-facebook"></i>
+                          </a>
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Google" class="btn btn-social-icon btn-google-plus" HREF="{{url('hwi_oauth_service_redirect',{service: "google"})}}">
+                              <i class="fa fa-google-plus"></i>
+                          </a>
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Microsoft" class="btn btn-social-icon btn-microsoft" HREF="{{url('hwi_oauth_service_redirect',{service: "microsoft"})}}">
+                              <i class="fa fa-windows"></i>
+                          </a>
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Twitch" class="btn btn-social-icon btn-twitch" HREF="{{url('hwi_oauth_service_redirect',{service: "twitch"})}}">
+                              <i class="fa fa-twitch"></i>
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block title %}{{ parent() }}Inscription{% endblock %}
+{% block description %}Formulaire d'inscription à Gamers-life.fr{% endblock %}
+{% block keywords %}{% endblock %}

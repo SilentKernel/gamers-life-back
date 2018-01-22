@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class="row">
+      <div class="col-lg-12">
+          <div class="well">
+              <h4>Erreur {{ status_code }}</h4>
+              <p>Moo c'est perdu dans ses pensée...</p>
+              <p>{{ status_text }}</p>
+          </div>
+      </div>
+    </div>
+{% endblock %}
+
+{% block title %}{{ parent() }} Erreur {{ status_code }}{% endblock %}

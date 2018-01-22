@@ -1,0 +1,29 @@
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    <ul class="nav navbar-right navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                {% if user.avatar == null %}
+                    <span class="glyphicon glyphicon-user"></span>
+                {% else %}
+                    <img alt = "Avatar de {{ user.nickname }}" class="img-rounded" SRC="{{ user.avatar| imagine_filter('avatar_mini') }}">
+                {% endif %} {{ user.nickname }} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ path('fos_user_profile_edit') }}"><i class="glyphicon glyphicon-cog"></i> Mon profil / Mes paramètres</a></li>
+                {% if user.oauth == false %}
+                    <li><a href="{{ path('fos_user_change_password') }}"><i class="glyphicon glyphicon-lock"></i> Modifier mon mot de passe</a></li>
+                {% endif %}
+                <li class="divider"></li>
+                <li><a href="{{ path("fos_user_security_logout") }}"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</a></li>
+            </ul>
+        </li>
+
+    </ul>
+{% else %}
+    <div class = "nav navbar-right navbar-nav">
+        <div class="navbar-form">
+            <a href="{{ path("fos_user_security_login") }}" class="btn btn-default" onClick="return showModalLoginForm();"><i class="glyphicon glyphicon-log-in"></i> Connexion</a>
+            <a href="{{ path("fos_user_registration_register") }}" class="btn btn-primary" onClick="return showModalRegisterForm();"><i class="glyphicon glyphicon-pencil"></i> S'inscrire</a>
+        </div>
+    </div>
+{% endif %}

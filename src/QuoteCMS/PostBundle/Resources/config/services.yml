@@ -1,0 +1,20 @@
+services:
+    quote_cms_post.vote_tools:
+        class: QuoteCMS\PostBundle\Service\VoteTools
+        arguments: [@doctrine]
+
+    quote_cms_post.random_tools:
+        class: QuoteCMS\PostBundle\Service\RandomTools
+        arguments: [@doctrine]
+
+    quote_cms_post.admin.post:
+        class: QuoteCMS\PostBundle\Admin\PostAdmin
+        arguments: [~, QuoteCMS\PostBundle\Entity\Post, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Post, label: Post}
+
+    quote_cms_post.admin.post_picture:
+        class: QuoteCMS\PostBundle\Admin\PostPictureAdmin
+        arguments: [~, QuoteCMS\PostBundle\Entity\PostPicture, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: Post, label: PostPicture}

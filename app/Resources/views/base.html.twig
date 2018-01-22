@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>{% block title %}Gamers Life - {% endblock %}</title>
+
+  <meta name="description" content="{% block description %}Gamer's Life rassemble les histoires croustillantes des joueurs... se passant sur leurs jeux vidéos.{% endblock %}"/>
+  <meta name="keywords" content="{% block keywords %}jeu, video, histoire, wtf, what the fuck, jeu en ligne, jeu en réseau, Moo{% endblock %}"/>
+  <meta name="theme-color" content="#23262b">
+
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/static/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/static/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/static/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/static/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/static/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/static/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+
+  {% stylesheets filter='?uglifycss'
+  '@QuoteCMSCoreBundle/Resources/public/css/*'
+  '@QuoteCMSPostBundle/Resources/public/css/*'
+  '@QuoteCMSUserBundle/Resources/public/css/*'
+  '@QuoteCMSFaqBundle/Resources/public/css/*'
+  '@SilentkernelEmoticonBundle/Resources/public/css/*'
+  '@SilentkernelCommentBundle/Resources/public/css/*' %}
+  <link rel="stylesheet" href="{{ asset_url }}?{{ asset_version }}" type="text/css" media="all"/>
+  {% endstylesheets %}
+
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" id = "global-nav-bar"> {# Navbar #}
+    <div class="container hidden-sm hidden-xs hidden-md" id="big-banner"> {# Big Banner on XL screen and Top Page #}
+      <div class="row">
+        <div class="col-lg-5 col-md-5">
+          <a href="{{ path("quote_cms_core_homepage") }}">
+            <img class = "big-logo" src="/static/Logo.svg" alt="Grand logo de Gamer's Life" >
+          </a>
+        </div>
+        <div class="col-lg-7 col-md-7 " >
+          <div class="spacer-xl"></div>
+          <h3><sup><i class="fa fa-quote-left"></i></sup> <i>Vos histoires ont du piquant !</i> </h3>
+        </div>
+      </div>
+    </div>
+    <div class="container"> {# Bootstrap container #}
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gamers-life-nav-bar">
+          <span class="sr-only">Afficher la barre de navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a id="logo-small" class="navbar-brand hidden-lg" href="{{ path("quote_cms_core_homepage") }}">
+          <img src="/static/Logo.svg" class="img-logo" alt="Logo de Gamer's Life">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="gamers-life-nav-bar">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+              <span class = "hidden-sm">{% block order_view %}Trier par{% endblock %}</span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ path('quote_cms_core_homepage') }}"><i class="fa fa-sort-numeric-desc"></i> Les dernières</a></li>
+              <li><a href="{{ path('quote_cms_gamme_list_all') }}"><i class="fa fa-gamepad"></i> Jeux</a></li>
+              <li><a href="{{ path('quote_cms_post_origin') }}"><i class="fa fa-sort-numeric-asc"></i> Les premières</a></li>
+              <li><a href="{{ path('quote_cms_post_plusone') }}"><i class="fa fa-thumbs-o-up"></i> Les mieux notées</a></li>
+              <li><a href="{{ path('quote_cms_post_leastone') }}"><i class="fa fa-thumbs-o-down"></i> Les moins bien notées</a></li>
+              <li><a href="{{ path('quote_cms_post_random') }}"><i class="fa fa-random"></i> Aléatoire</a></li>
+            </ul>
+          </li>
+          <li class="{%  block new_quote_nav_bar %}{% endblock %}">
+            <a href="{{ path('quote_cms_post_new') }}"><span class="fa fa-pencil"></span> Proposer <span class = "hidden-sm">votre #GL</span></a>
+          </li>
+          <li class="{%  block blog_nav_bar %}{% endblock %}">
+            <a href="{{ path('quote_cms_blog_homepage') }}"><span class="fa fa-newspaper-o"></span> Blog</a>
+          </li>
+          <li>
+            <a title ="Forum" href = "https://forum.gamers-life.fr/{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}session/sso{% endif %}"><i class="fa fa-comment"></i> Forum</a>
+          </li>
+        </ul>
+        <div id="UserNavBar">
+          {{ render(controller('QuoteCMSUserBundle:Navbar:showUserBar')) }}
+        </div>
+      </div>
+    </div>
+  </nav> {# Navbar end #}
+
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        {# {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class= "alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <span class="glyphicon glyphicon-remove"></span> {{ flashMessage }}
+        </div>
+      {% endfor %}
+
+      {% for flashMessage in app.session.flashbag.get('notice') %}
+      <div class= "alert alert-info alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <span class="glyphicon glyphicon-info-sign"></span> {{ flashMessage }}
+      </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('success') %}
+    <div class= "alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <span class="glyphicon glyphicon-ok"></span> {{ flashMessage }}
+    </div>
+  {% endfor %} #}
+
+  {% block heading_container %}{% endblock %}
+</div>
+</div>
+
+<div class = "row">
+  <section class="col-xs-12 col-sm-12 col-md-8 col-lg-9" id="main_container">
+    {% block container %}{% endblock %}
+  </section>
+
+  <nav class = "hidden-xs hidden-sm col-md-4 col-lg-3" id = "right_panel">
+    {% block nav_heading %}{% endblock %}
+
+    {% include('QuoteCMSCoreBundle:Block:Category.html.twig') %}
+
+    <div class = "panel panel-default">
+      <div class = "panel-heading">
+        Gamer's Life dans ta poche
+      </div>
+      <div class = "panel-body">
+        <div class ="row">
+          <div class = "col-lg-12">
+            <a target="_blank" href="https://play.google.com/store/apps/details?id=fr.gamers6life.app&amp;hl=fr">
+              <img src = "/static/google-play-r.png" class="img-responsive" alt = "Télécharger l'application Android">
+            </a>
+          </div>
+          <div class = "col-lg-12">
+            <a target="_blank" href="https://itunes.apple.com/fr/app/id1054229295">
+              <img src = "/static/app-store-r.png" class="img-responsive" alt = "Télécharger l'application iOS">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% include('QuoteCMSCoreBundle:Block:Menu.html.twig') %}
+
+    <div class = "panel panel-default">
+      <div class = "panel-heading">
+        Nos serveurs de jeu
+      </div>
+      <div class = "panel-body text-center">
+        <a href="https://tf2.gamers-life.fr" target="_blank" title="Statinstiques des serveurs Team Fortress 2"><img src ="/static/tf2.jpg" class="img-responsive img-rounded" alt= "Logo de Team Fortress 2"></a>
+      </div>
+    </div>
+
+    <div class = "panel panel-default">
+      <div class = "panel-heading">
+        Rejoignez-nous
+      </div>
+      <div class = "panel-body text-center">
+        <a class="btn btn-social btn-facebook" target="_blank" HREF="{{ facebook_page }}">
+          <i class="fa fa-facebook"></i><span class = "pull-right">Facebook</span>
+        </a>
+        <div class = "spacer-xs"></div>
+        <a class="btn btn-social btn-twitter" target="_blank" HREF="{{ twitter_page }}">
+          <i class="fa fa-twitter"></i> <span class = "pull-right">Twitter</span>
+        </a>
+      </div>
+    </div>
+
+  </nav>
+</div>
+</div> {# Boostraop container end #}
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="text-center">
+          <br />
+          <p>
+            Gamer's Life - 2015 - Tous les noms de jeux sont des marques déposées par des entreprises tierces, Gamer's Life n'est en ancun cas affilié à ces entreprises.
+          </p>
+          <h4>
+            Ce site est encore au stade de beta publique, des bugs peuvent exister, nous mettons tout en oeuvre pour les corriger au plus vite.
+          </h4>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4">
+        {#<h4><i class="fa fa-globe"></i> Liens rapides</h4>#}
+        <ul class="list-unstyled">
+          <li><a href="{{ path('quote_cms_faq_mentions') }}"><i class="fa fa-info-circle"></i> Mentions légales</a></li>
+          <li><a href="{{ path('quote_cms_faq_reglement') }}"><i class="fa fa-gavel"></i> Réglement</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4">
+        {#<h4><i class="fa fa-users"></i> Nous </h4>#}
+        <ul class="list-unstyled">
+          <li><a href="{{ path('quote_cms_faq_faq') }}"><i class="fa fa-question-circle"></i> Foire aux questions</a></li>
+          <li><a href="mailto:contact@gamers-life.fr"><i class="fa fa-question-circle"></i> Nous contacter</a></li>
+          <li><a href="#" onclick="return coffee();"><i class="fa fa-coffee"></i> Un café siouplé !</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4">
+        {# <h4><i class="fa fa-comments"></i>  Les réseaux de copains</h4> #}
+        <a class="btn btn-social btn-facebook" target="_blank" HREF="{{ facebook_page }}">
+          <i class="fa fa-facebook"></i><span class = "pull-right">Facebook</span>
+        </a>
+        <a class="btn btn-social btn-twitter" target="_blank" HREF="{{ twitter_page }}">
+          <i class="fa fa-twitter"></i> <span class = "pull-right">Twitter</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  {# Wee don't use margin bottom in css cause js will not count it ! #}
+  <div class = "spacer hidden-xl hidden-md"></div>
+</footer>
+
+{% javascripts filter='?uglifyjs2'
+'@QuoteCMSCoreBundle/Resources/public/js/*'
+'@FOSJsRoutingBundle/Resources/public/js/router.js'
+'@QuoteCMSJSBundle/Resources/public/js/route.js'
+'@QuoteCMSUserBundle/Resources/public/js/*'
+'@QuoteCMSPostBundle/Resources/public/js/*'
+'@QuoteCMSGameBundle/Resources/public/js/*'
+'@SilentkernelCommentBundle/Resources/public/js/comments.js'
+'@SilentkernelCommentBundle/Resources/public/js/vote.js' %}
+<script src="{{ asset_url }}?{{ asset_version }}"></script>
+{% endjavascripts %}
+<noscript><p><img src="htt://piwik.gamers-life.fr/p.php?idsite=3" style="border:0;" alt="" /></p></noscript>
+
+
+{% if is_granted("ROLE_MODERATOR") %}
+{% javascripts filter='?uglifyjs2'
+'@SilentkernelCommentBundle/Resources/public/js/moderation.js'
+'@QuoteCMSModeratorBundle/Resources/public/js/*' %}
+<script src="{{ asset_url }}?{{ asset_version }}"></script>
+{% endjavascripts %}
+{% endif %}
+
+{# Removed in prod #}
+{#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
+
+{% block javascripts %}{% endblock %}
+
+<script>
+jQuery(document).ready(function(){dRInit({% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}true{% else %}false{% endif %});
+{% for flashMessage in app.session.flashbag.get('error') %}
+showNotification("", "{{ flashMessage }}", "danger");
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+showNotification("","{{ flashMessage }}", "info");
+{% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('success') %}
+showNotification("", "{{ flashMessage }}", "success");
+{% endfor %}
+
+{% block inDocumentReady %}{% endblock %}});
+</script>
+
+</body>
+</html>

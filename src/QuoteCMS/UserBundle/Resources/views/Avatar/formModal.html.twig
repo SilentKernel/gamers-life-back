@@ -1,0 +1,42 @@
+<div class="modal fade" id = "avatarFormModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Ajouter/Changer d'avatar</h4>
+            </div>
+            <div class="modal-body">
+                <div class = "row">
+                    <div class= "col-lg-12" id="avatarFormModalMessage">
+
+                    </div>
+                </div>
+
+                <form action="{{ path("quote_cms_user_change_avatar") }}" method="post" {{ form_enctype(form) }} class="form-horizontal" id="avatarUploadForm">
+                    <div class = "form-group">
+                        {{ form_label(form.file, "Selectionnez votre avatar :", {"label_attr" : {'class' : 'control-label col-lg-3'}}) }}
+                        <div class = "col-lg-9">
+                            {{ form_widget(form.file, {'attr' : {'class' :'form-control', 'accept' : "image/jpeg,image/png,image/gif"}}) }}
+                        </div>
+                    </div>
+
+                    {{ form_rest(form) }}
+
+                    <div class = "form-group">
+                        <div class = "col-lg-9 col-lg-offset-3">
+                            <input id= "submit_avatar_upload_modal" class = "btn btn-default" type="submit" id="_submit" name="_submit" value="Upload !" />
+                            <button id="close_avatar_upload_modal" type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+
+                            <br /> <br />
+                            <p>Pour être accépté un avatar doit respecter les critères suivants :</p>
+                            <ul>
+                                <li>Image de type jpeg, png ou gif</li>
+                                <li>Le fichier ne doit pas dépasser 2 Mo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{% if subject.slug != "" %}
+  {% if type == "q" %} {# quotes #}
+    {% set route = "quote_cms_post_view_single" %}
+    {% set param = {'postSlug': subject.slug, 'gameSlug' : subject.game.slug } %}
+    {% set preText = "#GL " ~ subject.id ~ " - " %}
+  {% else %} {# blog #}
+    {% set route = "quote_cms_blog_view_single" %}
+    {% set param = {"articleSlug" : subject.slug } %}
+    {% set preText = "#GL #Blog - " %}
+  {% endif %}
+
+<div class = "hidden-xs">
+  <a target="_blank" data-toggle="tooltip" data-placement="left" title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url(route, param)|url_encode }}&amp;t={{ preText|url_encode ~ subject.title|url_encode ~ ' - '|url_encode }}" rel="nofollow" onclick="return showFacebookShare(this, '{{ type }}', {{ subject.id }});" class = "btn btn-social btn-facebook btn-sm"><i class="fa fa-facebook"></i> <span class="label label-default">{{ subject.sharecount.facebook }}</span></a>
+  <a target="_blank" data-toggle="tooltip" data-placement="left" title="Partager sur Google+" href="https://plus.google.com/share?url={{ url(route, param)|url_encode }}&amp;hl=fr" rel="nofollow" onclick="return showGooglePlusShare(this, '{{ type }}', {{ subject.id }});" class = "btn btn-social btn-google-plus btn-sm"><i class="fa fa-google-plus"></i> <span class = "label label-default">{{ subject.sharecount.google }}</span></a>
+  <a target="_blank" data-toggle="tooltip" data-placement="left" title="Partager sur Twitter" href="https://twitter.com/share?url={{ url(route, param)|url_encode }}&amp;text={{ preText|url_encode ~ subject.title|url_encode ~ ' - '|url_encode }}&amp;via={{ twitter_account|url_encode }}" rel="nofollow" onclick="return showTwitterShare(this, '{{ type }}', {{ subject.id }});" class = "btn btn-social btn-twitter btn-sm"><i class="fa fa-twitter"></i> <span class="label label-default">{{ subject.sharecount.twitter }}</span></a>
+</div>
+<div class = "hidden-sm hidden-md hidden-lg no-padding-left">
+  <div class="btn-group" role="group">
+    <a target="_blank" title="Partager sur Facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ url(route, param)|url_encode }}&amp;t={{ preText|url_encode ~ subject.title|url_encode ~ ' - '|url_encode }}" rel="nofollow" onclick="return showFacebookShare(this, '{{ type }}', {{ subject.id }});" class = "btn btn-social-icon btn-sm btn-facebook"><i class="fa fa-facebook"></i></a>
+    <a target="_blank" title="Partager sur Google+" href="https://plus.google.com/share?url={{ url(route, param)|url_encode }}&amp;hl=fr" rel="nofollow" onclick="return showGooglePlusShare(this, '{{ type }}', {{ subject.id }});" class = "btn btn-social-icon btn-sm btn-google-plus"><i class="fa fa-google-plus"></i></a>
+    <a target="_blank" title="Partager sur Twitter" href="https://twitter.com/share?url={{ url(route, param)|url_encode }}&amp;text={{ preText|url_encode ~ subject.title|url_encode ~ ' - '|url_encode }}&amp;via={{ twitter_account|url_encode }}" rel="nofollow" onclick="return showTwitterShare(this, '{{ type }}', {{ subject.id }});" class = "btn btn-social-icon btn-sm btn-twitter"><i class="fa fa-twitter"></i></a>
+  </div>
+</div>
+{% endif %}

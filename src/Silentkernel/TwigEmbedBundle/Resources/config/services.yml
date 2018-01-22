@@ -1,0 +1,5 @@
+services:
+    silentkernel_twig_embed.embed:
+        class: Silentkernel\TwigEmbedBundle\Twig\TwigVideoEmbed
+        tags:
+            - { name: twig.extension }

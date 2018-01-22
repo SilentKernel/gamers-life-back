@@ -1,0 +1,4 @@
+services:
+    silentkernel_social_api.get_share_count:
+        class: Silentkernel\SocialAPIBundle\Service\GetShareCount
+        arguments: []

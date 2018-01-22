@@ -1,0 +1,35 @@
+silentkernel_comment_refresh_general_div:
+    path:     /ajax/comment/refresh_general_div/{context}/{contextId}/{routeId}/{routeParam}/{routeSignature}/
+    defaults: { _controller: SilentkernelCommentBundle:AjaxComment:refreshCommentGeneralDiv }
+    options:
+       expose: true
+
+silentkernel_comment_add:
+    path:     /ajax/comment/add/{context}/{contextId}/{commentParent}/
+    defaults: { _controller: SilentkernelCommentBundle:AjaxComment:addCommentForm }
+    options:
+       expose: true
+
+silentkernel_comment_vote:
+    path:     /ajax/comment/plusone/{comment}/
+    defaults: { _controller: SilentkernelCommentBundle:AjaxVote:plusOne }
+    options:
+       expose: true
+
+silentkernel_comment_report:
+    path:     /ajax/comment/report/{comment}/
+    defaults: { _controller: SilentkernelCommentBundle:AjaxComment:report }
+    options:
+       expose: true
+
+silentkernel_comment_delete_by_user:
+    path:     /ajax/comment/user-delete/{comment}/
+    defaults: { _controller: SilentkernelCommentBundle:AjaxComment:userDeleteComment }
+    options:
+       expose: true
+
+silentkernel_comment_delete_by_moderator:
+    path:     /ajax/comment/moderation-delete/{comment}/
+    defaults: { _controller: SilentkernelCommentBundle:AjaxModeration:moderatorDeleteComment }
+    options:
+       expose: true

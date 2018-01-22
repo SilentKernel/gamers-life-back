@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li class = "active">Accueil</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+    {% include 'QuoteCMSPostBundle:List:List.html.twig' with {'posts' : posts, 'notShowFirst' : false } %}
+{% endblock %}
+
+{% block title %}{{ parent() }}Vos histoires ont du piquant{% endblock %}

@@ -1,0 +1,10 @@
+services:
+    silentkernel_emoticon.parser:
+        class: Silentkernel\EmoticonBundle\Parser\EmoticonParserService
+        arguments: [@silentkernel_comment.parser]
+
+    silentkernel_emoticon.twig:
+        class: Silentkernel\EmoticonBundle\Twig\TwigEmoticon
+        arguments: [@silentkernel_emoticon.parser, @silentkernel_comment.parser]
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,27 @@
+{% if user.avatar != null %}
+    <div class="po_user_avatar">
+        <img alt = "Avatar de {{ user.nickname|title }}" class="img-rounded" SRC="{{ user.avatar| imagine_filter('avatar_70') }}">
+    </div>
+{% else %}
+    <div class="po_user_avatar">
+        <img alt = "Avatar de {{ user.nickname|title }}" class="img-rounded" SRC="{{ '/static/avatar_default.png'| imagine_filter('avatar_70') }}">
+    </div>
+{% endif %}
+<div class="po_user_title text-center ">
+    <h4>{{ user.nickname|title }}</h4>
+</div>
+<div class="well well-sm">
+    <span class="fa fa-pencil"></span>
+    GL publiées :
+    <span class="badge pull-right">{{ user|glPosts }}</span>
+</div>
+<div class="well well-sm">
+    <span class="glyphicon glyphicon-comment"></span>
+    Commentaires postés :
+    <span class="badge pull-right">{{ user|glComments }}</span>
+</div>
+<div class="well well-sm">
+    <span class="badge pull-right">{{ user|glLikes }}</span>
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+    Likes :
+</div>

@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('quote_cms_blog_homepage') }}">Blog</a></li>
+        <li class="active">{{ article.title }}</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+
+    {% include 'QuoteCMSBlogBundle:Single:singlePart.html.twig' with {'article' : article, 'inList' : false} %}
+
+    {% include 'SilentkernelCommentBundle:General:CommentsBase.html.twig' with {'commentData' : commentData} %}
+
+{% endblock %}
+
+{% block blog_nav_bar %}active{% endblock %}
+{% block title %}{{ parent() }}Le blog de Moo | {{ article.title }}{% endblock %}
+{% block keywords %}{{ parent() }}, Moo, Blog de Moo, Moo le hérisson{% for keyword in article.keywords %}, {{keyword}}{% endfor %}{% endblock %}
+{% block description %}Article {{ article.title }} du blog de Moo{% endblock %}

@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block heading_container %}
+    <ol class="breadcrumb">
+        <li class = "active">Blog</li>
+    </ol>
+{% endblock %}
+
+{% block container %}
+{% for article in articles %}
+    {% include 'QuoteCMSBlogBundle:Single:singlePart.html.twig' with {'article' : article, 'inList' : true} %}
+{% endfor %}
+{% endblock %}
+
+{% block blog_nav_bar %}active{% endblock %}
+{% block title %}{{ parent() }}Le blog de Moo{% endblock %}
+{% block keywords %}{{ parent() }}, Blog de Moo, Moo le hérisson{% endblock %}
+{% block description %}Blog officiel de Moo, la mascotte de Gamer's Life, vous trouverez ici les dernières infos sur gamers-life.fr{% endblock %}

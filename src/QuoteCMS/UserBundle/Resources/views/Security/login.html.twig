@@ -1,0 +1,58 @@
+{% extends "::base.html.twig" %}
+
+{% block container %}
+    <div class="panel panel-default">
+        <div class= "panel-heading">
+            Connexion
+        </div>
+        <div class = "panel-body">
+            <form action="{{ path("fos_user_security_check") }}" method="post" class="form-horizontal">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                    <div class = "col-lg-8">
+                        <input class="form-control" type="password" id="password" name="_password" required="required" />
+                        <a href="{{ path("fos_user_resetting_request") }}" onclick="closeLoginShowReset();return false;">Mot de passe oublié ?</a>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class = "form-group">
+                    <div class="col-lg-8 col-lg-offset-3">
+                        <input class = "btn btn-default" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                        <a href="{{ path("fos_user_registration_register") }}" type="button" onclick="closeLoginShowRegister();return false;" class="btn btn-primary">S'inscrire</a>
+
+                        <div class="pull-right">
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Facebook" class="btn btn-social-icon btn-facebook" HREF="{{url('hwi_oauth_service_redirect',{service: "facebook"})}}">
+                              <i class="fa fa-facebook"></i>
+                          </a>
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Google" class="btn btn-social-icon btn-google-plus" HREF="{{url('hwi_oauth_service_redirect',{service: "google"})}}">
+                              <i class="fa fa-google-plus"></i>
+                          </a>
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Microsoft" class="btn btn-social-icon btn-microsoft" HREF="{{url('hwi_oauth_service_redirect',{service: "microsoft"})}}">
+                              <i class="fa fa-windows"></i>
+                          </a>
+                          <a onclick="return oAuthLoginClick();" data-toggle="tooltip" data-placement="top" title="Connexion avec Twitch" class="btn btn-social-icon btn-twitch" HREF="{{url('hwi_oauth_service_redirect',{service: "twitch"})}}">
+                              <i class="fa fa-twitch"></i>
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock container %}
+{% block title %}{{ parent() }}Connexion{% endblock %}
+{% block description %}Formulaire d'authentification de Gamers-life.fr{% endblock %}
+{% block keywords %}{% endblock %}

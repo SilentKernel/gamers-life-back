@@ -1,0 +1,83 @@
+<div class="media" id="comment-{{ comment.id }}">
+  <div class="media-left text-center">
+    {{ render(controller('QuoteCMSUserBundle:PopOver:usernamePopover', { 'user' : comment.user, 'position' :'top', 'originalRequest' : app.request} )) }}
+    <div class="spacer-xs"></div>
+    {% include 'QuoteCMSUserBundle:Avatar:avatarResponsive.html.twig' with {'user' : comment.user } %}
+  </div>
+  <div class="media-body">
+    <div class = "row">
+      <div class ="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div id = "comment-text-{{ comment.id }}" class="comment-text">
+          {% if comment.parentComment != null %}
+          <blockquote class="blockquote-comment">
+            <p class="blockquote-comment-title">Réponse à {{ comment.parentComment.user.nickname }} :</p>
+            {% include "SilentkernelCommentBundle:Single:CommentMessage.html.twig" with {"comment" : comment.parentComment } %}
+          </blockquote>
+          {% endif %}
+
+          {# Real comment #}
+          {% include "SilentkernelCommentBundle:Single:CommentMessage.html.twig" with {"comment" : comment } %}
+        </div>
+      </div>
+      <div class ="col-lg-4 col-md-4 col-sm-4 hidden-xs">
+        <div class="pull-left">
+          <i class = "fa fa-clock-o"></i>
+          <i>
+            {% include "SilentkernelCommentBundle:Single:DateDiff.html.twig" with {"comment" : comment } %}
+          </i>
+          |
+          <i class = "{{ comment.deviceType.icon }}"></i>
+        </div>
+      </div>
+      <div class ="hidden-lg hidden-md hidden-sm col-xs-12">
+        <div class="pull-right">
+          <i class = "fa fa-clock-o"></i>
+          <i>{{ comment.creationdate|time_diff }}</i>
+          |
+          <i class = "{{ comment.deviceType.icon }}"></i>
+
+        </div>
+      </div>
+      <div class ="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="pull-right">
+          {# Moderation #}
+          {% if is_granted('ROLE_MODERATOR') %}
+          {% if not comment.isDeleted %}
+          <a href="#" onclick="return deleteComment({{ comment.id }}, true);" class="btn btn-sm btn-danger" title = "Supprimer ce commentaire (moderation)">
+            <span class="fa fa-trash-o"> modération</span>
+          </a>
+          |
+          {% endif %}
+          {#<a href="#" onclick="" class="btn btn-sm btn-primary" title = "Editer ce commentaire (moderation)">
+          <span class="fa fa-pencil-square-o"></span>
+          </a> #}
+          {% endif %}
+
+          {# User self action #}
+          {% if app.user == comment.user %}
+          {% if not comment.isDeleted %}
+          <a href="#" onclick="return deleteComment({{ comment.id }}, false);" class="btn btn-sm btn-danger" title = "Supprimer mon commentaire">
+            <span class="fa fa-trash-o"></span>
+          </a>
+          {% endif %}
+          {#
+          <a href="#" onclick="" class="btn btn-sm btn-primary" title = "Editer mon commentaire">
+          <span class="fa fa-pencil-square-o"></span>
+          </a> #}
+          {% endif %}
+          <a href="#" onclick="return commentVote({{ comment.id }});" class="btn btn-sm btn-default">
+            <span class="fa fa-thumbs-up"></span>
+            <span id = "comment-plus-one-{{ comment.id }}" class="label label-default">{{ comment.plusOne }}</span>
+          </a>
+          <a href="#" onclick = "return showAddCommentForm({{ comment.topic.context }}, {{ comment.topic.contextId }}, {{ comment.id }});" class="btn btn-sm btn-default">
+            <i class="fa fa-quote-right"></i>
+            Citer
+          </a>
+          <a onclick= "return reportComment({{ comment.id }});" href="#" class="btn btn-sm btn-default" title="Signaler">
+            <i class="fa fa-exclamation-triangle"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
